@@ -486,21 +486,40 @@ footer p {
 /* --- Responsive --- */
 @media (max-width: 768px) {
     header { top: var(--space-xs); width: 95%; }
-    .navbar { padding: 0.5rem 1.5rem; border-radius: 30px; }
+    .navbar { padding: 0.5rem 1.25rem; border-radius: 30px; }
     .nav-links { display: none; }
     
     .mobile-nav { display: flex; } /* Show mobile nav */
-    body { padding-bottom: 5rem; } /* Space for bottom nav */
+    body { padding-bottom: 4.5rem; } /* Space for bottom nav */
     
-    .hero-container { padding: var(--space-2xl) var(--space-md); }
-    h1 { font-size: 3rem; }
+    /* Reduced Hero Spacing */
+    .hero { 
+        min-height: auto; 
+        padding: var(--space-xl) var(--space-sm) var(--space-md); 
+        padding-top: 5.5rem; /* Space for fixed header */
+    }
+    .hero-container { padding: var(--space-lg) var(--space-sm); border-radius: 20px; }
+    .hero-image img { width: 120px; height: 120px; margin-bottom: var(--space-md); }
+    h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+    .intro { font-size: 1rem; margin-bottom: var(--space-lg); }
+    .social-links { margin-bottom: var(--space-lg); }
     
-    .cta-group { flex-direction: column; width: 100%; max-width: 300px; margin: 0 auto; }
-    .btn { width: 100%; text-align: center; }
+    /* Compact Sections */
+    .section { 
+        padding: var(--space-lg) 0; 
+        scroll-margin-top: 5rem; /* Offset for header when clicking links */
+    }
+    .section-title { font-size: 1.8rem; margin-bottom: var(--space-lg); }
     
-    .section { padding: var(--space-3xl) 0; }
-    .about-card { padding: var(--space-lg); }
+    /* Compact Cards */
+    .about-card, .contact-card { padding: var(--space-lg) var(--space-md); }
+    .skill-card { padding: var(--space-lg) var(--space-sm); }
+    .project-card { padding: var(--space-lg); }
     
-    footer { margin: var(--space-md); border-radius: 20px; }
+    .cta-group { flex-direction: column; width: 100%; max-width: 260px; margin: 0 auto; gap: 0.75rem; }
+    .btn { width: 100%; text-align: center; padding: 0.8rem 1.5rem; }
+    .btn-glow { padding: 1rem 2rem; }
+    
+    footer { margin: var(--space-md); border-radius: 20px; padding: var(--space-md); }
 }
 
