@@ -1,7 +1,0 @@
-# .gitignore
-.vscode/
-node_modules/
-.DS_Store
-*.log
-# .gemini/
-.gemini/
