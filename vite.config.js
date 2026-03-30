@@ -8,6 +8,6 @@ export default defineConfig({
     transformer: 'postcss',
   },
   build: {
-    cssMinify: 'lightningcss', 
+    cssMinify: false,
   },
 })
