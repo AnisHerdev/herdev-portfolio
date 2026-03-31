@@ -7,7 +7,7 @@ const Contact = () => {
         <div className="contact-card glass">
           <h2>Let's Collaborate</h2>
           <p>I am always looking for exciting hackathons or impactful projects to contribute to. Feel free to reach out!</p>
-          <a href="mailto:anish@rvu.edu.in" className="btn btn-glow">Get In Touch</a>
+          <a href="mailto:anisherdev@gmail.com" className="btn btn-glow">Get In Touch</a>
         </div>
       </div>
     </section>

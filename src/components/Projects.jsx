@@ -12,7 +12,7 @@ const Projects = ({ projects }) => {
               <h3>{project.title}</h3>
               <p>{project.description}</p>
               <div className="project-links">
-                <a href={project.link} className="link" aria-label={project.ariaLabel}>
+                <a href={project.link} className="link" aria-label={project.ariaLabel} target="_blank" rel="noopener noreferrer">
                   View Demo <i className="fas fa-arrow-right"></i>
                 </a>
               </div>

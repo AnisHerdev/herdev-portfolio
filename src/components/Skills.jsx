@@ -7,19 +7,19 @@ const Skills = () => {
         <h2 className="section-title">Core Competencies</h2>
         <div className="skills-grid">
           <div className="skill-card glass skill-blue">
-            <i className="fas fa-brain"></i>
-            <h3>AIML</h3>
-            <p>Specialized in building intelligent systems that learn and adapt.</p>
+            <i className="fas fa-code"></i>
+            <h3>Languages</h3>
+            <p>Python, Java, C, HTML/CSS, JavaScript, SQL, MongoDB</p>
           </div>
           <div className="skill-card glass skill-pink">
-            <i className="fas fa-chart-line"></i>
-            <h3>Fintech</h3>
-            <p>Bridging technology with modern financial systems.</p>
+            <i className="fas fa-layer-group"></i>
+            <h3>Frameworks</h3>
+            <p>TensorFlow, pandas, matplotlib, Node.js, Express.js</p>
           </div>
           <div className="skill-card glass skill-green">
-            <i className="fas fa-users"></i>
-            <h3>Social Impact</h3>
-            <p>Driven by empathy to build solutions for the community.</p>
+            <i className="fas fa-tools"></i>
+            <h3>Tools</h3>
+            <p>VS Code, Google Colab, Git, GitHub Actions, Linux</p>
           </div>
         </div>
       </div>
