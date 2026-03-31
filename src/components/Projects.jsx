@@ -1,24 +1,12 @@
 import React from 'react';
+import ProjectsGrid from './ProjectsGrid';
 
-const Projects = ({ projects }) => {
+const Projects = () => {
   return (
     <section id="projects" className="section">
-      <div className="container">
+      <div className="container px-4">
         <h2 className="section-title">Featured Projects</h2>
-        <div className="projects-grid">
-          {projects.map((project, index) => (
-            <div key={index} className="project-card glass">
-              <div className="project-tag tag-green">{project.tag}</div>
-              <h3>{project.title}</h3>
-              <p>{project.description}</p>
-              <div className="project-links">
-                <a href={project.link} className="link" aria-label={project.ariaLabel} target="_blank" rel="noopener noreferrer">
-                  View Demo <i className="fas fa-arrow-right"></i>
-                </a>
-              </div>
-            </div>
-          ))}
-        </div>
+        <ProjectsGrid />
       </div>
     </section>
   );

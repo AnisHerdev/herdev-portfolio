@@ -11,21 +11,23 @@ export const useReadme = (repoName: string | undefined) => {
 
   useEffect(() => {
     if (!repoName || readmeCache.has(repoName)) {
-        if (repoName && readmeCache.has(repoName)) {
-            setMarkdown(readmeCache.get(repoName)!);
-            setLoading(false);
-        }
-        return;
+      if (repoName && readmeCache.has(repoName)) {
+        setMarkdown(readmeCache.get(repoName)!);
+        setLoading(false);
+      }
+      return;
     }
 
     const fetchReadme = async () => {
       const pat = import.meta.env.VITE_GITHUB_PAT;
+      const isValidPat = pat && pat !== 'your_pat_here';
       setLoading(true);
       setError(false);
 
       try {
+        const headers: HeadersInit = isValidPat ? { Authorization: `Bearer ${pat}` } : {};
         const response = await fetch(`https://api.github.com/repos/AnisHerdev/${repoName}/readme`, {
-          headers: pat ? { Authorization: `Bearer ${pat}` } : {},
+          headers
         });
 
         if (!response.ok) throw new Error('Readme fetch failed');

@@ -2,49 +2,64 @@ import { useState, useEffect } from 'react';
 import { ProjectConfig } from '../types/project.types';
 import { LOCAL_FALLBACK } from '../config/projects.config';
 
-let cachedConfig: { projects: ProjectConfig[], source: 'gist' | 'fallback' } | null = null;
+interface ConfigState {
+  projects: ProjectConfig[];
+  source: 'gist' | 'fallback';
+  loading: boolean;
+}
+
+let cachedConfig: ConfigState | null = null;
+let pendingRequest: Promise<ConfigState> | null = null;
 
 export const useProjectConfig = () => {
-  const [config, setConfig] = useState<{ projects: ProjectConfig[], source: 'gist' | 'fallback' } | null>(cachedConfig);
+  const [config, setConfig] = useState<ConfigState>(cachedConfig || {
+    projects: LOCAL_FALLBACK,
+    source: 'fallback',
+    loading: !cachedConfig,
+  });
 
   useEffect(() => {
     if (cachedConfig) return;
 
-    const fetchGist = async () => {
-      const gistId = import.meta.env.VITE_GIST_ID;
-      const pat = import.meta.env.VITE_GITHUB_PAT;
+    if (!pendingRequest) {
+      pendingRequest = (async (): Promise<ConfigState> => {
+        const gistId = import.meta.env.VITE_GIST_ID;
+        const pat = import.meta.env.VITE_GITHUB_PAT;
 
-      if (!gistId || !pat) {
-        cachedConfig = { projects: LOCAL_FALLBACK, source: 'fallback' };
-        setConfig(cachedConfig);
-        return;
-      }
+        const isInvalidGistId = !gistId || gistId === 'your_gist_id_here';
+        const isInvalidPat = !pat || pat === 'your_pat_here';
 
-      try {
-        const response = await fetch(`https://api.github.com/gists/${gistId}`, {
-          headers: {
-            Authorization: `Bearer ${pat}`,
-            Accept: 'application/vnd.github.v3+json',
-          },
-        });
+        if (isInvalidGistId || isInvalidPat) {
+          return { projects: LOCAL_FALLBACK, source: 'fallback', loading: false };
+        }
 
-        if (!response.ok) throw new Error('Fetch failed');
+        try {
+          const response = await fetch(`https://api.github.com/gists/${gistId}`, {
+            headers: {
+              Authorization: `Bearer ${pat}`,
+              Accept: 'application/vnd.github.v3+json',
+            },
+          });
 
-        const data = await response.json();
-        const firstFile = Object.values(data.files)[0] as { content: string };
-        const projects = JSON.parse(firstFile.content) as ProjectConfig[];
+          if (!response.ok) throw new Error('Fetch failed');
 
-        cachedConfig = { projects, source: 'gist' };
-        setConfig(cachedConfig);
-      } catch (error) {
-        console.error('Error fetching project config from Gist, falling back to local:', error);
-        cachedConfig = { projects: LOCAL_FALLBACK, source: 'fallback' };
-        setConfig(cachedConfig);
-      }
-    };
+          const data = await response.json();
+          const firstFile = Object.values(data.files)[0] as { content: string };
+          const projects = JSON.parse(firstFile.content) as ProjectConfig[];
 
-    fetchGist();
+          return { projects, source: 'gist', loading: false };
+        } catch (error) {
+          console.error('Error fetching project config from Gist, falling back to local:', error);
+          return { projects: LOCAL_FALLBACK, source: 'fallback', loading: false };
+        }
+      })();
+    }
+
+    pendingRequest.then((result) => {
+      cachedConfig = result;
+      setConfig(result);
+    });
   }, []);
 
-  return config || { projects: LOCAL_FALLBACK, source: 'fallback' };
+  return config;
 };

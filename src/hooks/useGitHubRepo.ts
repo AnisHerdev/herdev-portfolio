@@ -21,20 +21,22 @@ export const useGitHubRepo = (config: ProjectConfig | null) => {
 
     const fetchRepoData = async () => {
       const pat = import.meta.env.VITE_GITHUB_PAT;
+      const isValidPat = pat && pat !== 'your_pat_here';
       setLoading(true);
       setError(false);
 
-      if (!pat) {
-          console.warn('VITE_GITHUB_PAT missing, GitHub API calls will be rate-limited and might fail.');
+      if (!isValidPat) {
+        console.warn('Valid VITE_GITHUB_PAT missing, fetching repositories anonymously (subject to rate limits).');
       }
 
       try {
+        const headers: HeadersInit = isValidPat ? { Authorization: `Bearer ${pat}` } : {};
         const [repoRes, langRes] = await Promise.all([
           fetch(`https://api.github.com/repos/AnisHerdev/${config.repoName}`, {
-            headers: pat ? { Authorization: `Bearer ${pat}` } : {},
+            headers,
           }),
           fetch(`https://api.github.com/repos/AnisHerdev/${config.repoName}/languages`, {
-            headers: pat ? { Authorization: `Bearer ${pat}` } : {},
+            headers,
           }),
         ]);
 
