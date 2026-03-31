@@ -6,7 +6,7 @@ import ProjectCard from './ProjectCard';
 import { ProjectConfig } from '../types/project.types';
 
 const SkeletonCard = () => (
-  <div className="project-card glass bg-white/[0.02] border-white/5 animate-pulse min-h-[220px] flex flex-col p-8">
+  <div className="project-card glass bg-white/[0.02] border-white/5 animate-pulse flex flex-col p-8">
     <div className="flex gap-2 mb-4">
         <div className="h-5 bg-white/10 rounded-full w-16"></div>
         <div className="h-5 bg-white/10 rounded-full w-16"></div>
@@ -42,7 +42,7 @@ const ProjectsGrid: React.FC = () => {
 
     return (
         <div className="projects-grid-container">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="projects-grid">
                 {loading ? (
                     Array.from({ length: 3 }).map((_, i) => <SkeletonCard key={i} />)
                 ) : (

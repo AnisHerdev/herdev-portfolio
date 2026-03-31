@@ -14,38 +14,40 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ meta, size = 'compact' }) => 
 
   return (
     <div
-      onClick={() => window.open(meta.deployedUrl, '_blank', 'noopener,noreferrer')}
-      className="project-card glass group cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:border-white/20 hover:bg-white/[0.06]"
+      className="project-card glass group transition-all duration-300"
     >
       <div className="flex flex-col h-full">
-        <div className="flex flex-wrap gap-2 mb-4">
+        <div className="project-tag-container">
           {meta.languages.map((lang) => (
-            <span key={lang} className="project-tag tag-green !mb-0 !py-1 !px-3 text-[10px]">
+            <span key={lang} className="project-tag tag-green">
               {lang}
             </span>
           ))}
         </div>
         
-        <h3 className="!text-xl !mb-2 group-hover:text-[#3b82f6] transition-colors leading-tight">
+        <h3 className="group-hover:text-[#3b82f6] transition-colors leading-tight">
           {meta.alias}
         </h3>
         
-        <p className="text-sm text-white/70 line-clamp-2 md:line-clamp-2 overflow-hidden" style={{
-          display: '-webkit-box',
-          WebkitLineClamp: 2,
-          WebkitBoxOrient: 'vertical',
-        }}>
-          {meta.description || 'No description available'}
-        </p>
-
-        {size === 'full' && (
-          <div className="mt-auto pt-6 text-[10px] uppercase tracking-widest text-white/40 font-bold">
-            Updated {formattedDate}
-          </div>
+        {meta.description ? (
+          <p className="project-description line-clamp-3">
+            {meta.description}
+          </p>
+        ) : (
+          <p className="project-description muted-placeholder">
+            No description available
+          </p>
         )}
 
-        <div className="mt-6 flex items-center gap-2 text-xs font-bold text-white group-hover:text-[#3b82f6] transition-colors">
-          View Demo <i className="fas fa-arrow-right text-[10px] transition-transform group-hover:translate-x-1"></i>
+        <div className="mt-auto pt-6">
+          <a 
+            href={meta.deployedUrl} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="link"
+          >
+            View Demo <i className="fas fa-arrow-right"></i>
+          </a>
         </div>
       </div>
     </div>

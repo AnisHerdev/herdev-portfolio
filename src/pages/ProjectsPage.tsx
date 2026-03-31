@@ -8,9 +8,9 @@ import { ProjectConfig } from '../types/project.types';
 const ProjectCardWrapper: React.FC<{ config: ProjectConfig }> = ({ config }) => {
   const { meta, loading, error } = useGitHubRepo(config);
 
-  if (loading) return <div className="project-card glass bg-white/[0.02] border-white/5 animate-pulse min-h-[260px] p-8" />;
+  if (loading) return <div className="project-card glass bg-white/[0.02] border-white/5 animate-pulse p-8" />;
   if (error || !meta) return (
-    <div className="glass p-8 text-center text-sm text-white/30 border-white/5 min-h-[260px] flex items-center justify-center">
+    <div className="glass p-8 text-center text-sm text-white/30 border-white/5 flex items-center justify-center">
         Repo Error: {config.alias || config.repoName}
     </div>
   );
@@ -51,14 +51,14 @@ const ProjectsPage: React.FC = () => {
         </div>
 
         {loading ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="projects-grid">
             {Array.from({ length: 6 }).map((_, i) => (
-              <div key={i} className="project-card glass bg-white/[0.02] border-white/5 animate-pulse min-h-[260px]" />
+              <div key={i} className="project-card glass bg-white/[0.02] border-white/5 animate-pulse" />
             ))}
           </div>
         ) : (
           <>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="projects-grid">
               {currentProjects.map((project) => (
                 <ProjectCardWrapper key={project.repoName} config={project} />
               ))}

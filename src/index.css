@@ -447,33 +447,60 @@ h1 span {
 /* --- Projects --- */
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: var(--space-lg);
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-xl);
+  max-width: 1000px;
+  margin: 0 auto;
+  justify-content: center;
 }
 
 .project-card {
-  padding: var(--space-xl);
+  padding: var(--space-2xl) var(--space-xl);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   transition: var(--transition);
+  min-height: 280px;
+  max-width: 320px;
+  margin: 0 auto;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--blue-glow), var(--pink-glow));
+  opacity: 0.8;
 }
 
 .project-card:hover {
-  transform: scale(1.02);
+  transform: translateY(-6px);
   border-color: rgba(255, 255, 255, 0.2);
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.project-tag-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: var(--space-md);
 }
 
 .project-tag {
   align-self: flex-start;
-  padding: 0.4rem 1.2rem;
+  padding: 0.25rem 0.75rem;
   border-radius: 100px;
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 1px;
-  margin-bottom: var(--space-md);
+  white-space: nowrap;
 }
 
 .tag-green {
@@ -484,8 +511,22 @@ h1 span {
 
 .project-card h3 {
   margin-bottom: var(--space-sm);
-  font-size: 1.75rem;
+  font-size: clamp(1.25rem, 2vw, 1.5rem);
   font-weight: 700;
+  line-height: 1.2;
+}
+
+.project-description {
+  flex: 1;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: var(--space-md);
+}
+
+.muted-placeholder {
+  font-style: italic;
+  color: var(--text-muted);
 }
 
 .link {
@@ -496,12 +537,20 @@ h1 span {
   align-items: center;
   gap: 0.5rem;
   margin-top: var(--space-md);
-  transition: var(--transition);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.link i {
+  display: inline-block;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .link:hover {
-  gap: 0.75rem;
   color: var(--blue-glow);
+}
+
+.link:hover i {
+  transform: translateX(4px);
 }
 
 /* --- Contact --- */
