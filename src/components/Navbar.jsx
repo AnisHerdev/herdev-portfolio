@@ -8,7 +8,7 @@ const Navbar = ({ theme, toggleTheme }) => {
 
   return (
     <header className="animate-fade-in">
-      <div className="header-container flex items-center justify-center gap-4">
+      <div className="header-container">
         <nav className="navbar glass">
           <Link to="/#home" className="logo">S A Herdev Anish</Link>
           
@@ -95,11 +95,11 @@ const Navbar = ({ theme, toggleTheme }) => {
               aria-label="Open Terminal"
               style={{
                 fontFamily: 'monospace',
-                fontSize: 13,
+                fontSize: 20,
                 fontWeight: 700,
                 color: '#28C840',
                 background: 'rgba(40,200,64,0.08)',
-                border: '1px solid rgba(40,200,64,0.25)',
+                border: '2px solid rgba(40,200,64,0.25)',
                 borderRadius: 6,
                 padding: '4px 10px',
                 cursor: 'pointer',

@@ -91,6 +91,11 @@ body {
   scroll-behavior: smooth;
 }
 
+html {
+  scrollbar-gutter: stable;
+  overflow-y: scroll; /* fallback for older browsers */
+}
+
 body {
   background-color: var(--bg-dark);
   color: var(--text-primary);
@@ -180,46 +185,51 @@ body {
 header {
   position: fixed;
   top: var(--space-md);
-  left: 50%;
-  transform: translateX(-50%);
-  width: 95%;
-  max-width: 1200px;
+  left: 0;
+  right: 0;
+  width: 90%;
+  max-width: 1000px;
+  margin: 0 auto;
   z-index: 1000;
 }
 
 .header-container {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: var(--space-sm);
+  position: relative;
   width: 100%;
 }
 
 .back-btn-external {
-  height: 60px; /* Matching navbar height roughly with padding */
-  padding: 0 1.5rem;
+  position: absolute;
+  right: -130px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 48px;
+  padding: 0 1.25rem;
   border-radius: 100px;
   display: flex;
   align-items: center;
   gap: 0.75rem;
   cursor: pointer;
-  border: 1px solid var(--blue-glow); /* Blue accent to make it pop */
-  color: var(--text-primary); /* Brighter text */
-  font-weight: 750; /* Bolder text */
+  border: 1px solid var(--blue-glow);
+  color: var(--text-primary);
+  font-weight: 600;
   font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 1px;
   transition: var(--transition);
-  background: rgba(255, 255, 255, 0.08); /* More opaque */
+  background: rgba(255, 255, 255, 0.08);
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
-  box-shadow: 0 0 20px rgba(59, 130, 246, 0.15); /* Soft ambient glow */
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.15);
+  white-space: nowrap;
 }
 
 .back-btn-external:hover {
   border-color: #fff;
   box-shadow: 0 0 25px rgba(59, 130, 246, 0.35);
-  transform: translateY(-2px) scale(1.02);
+  transform: translateY(calc(-50% - 2px)) scale(1.02);
 }
 
 .light-mode .back-btn-external {
