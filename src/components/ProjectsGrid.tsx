@@ -52,7 +52,7 @@ const ProjectsGrid: React.FC = () => {
                 )}
             </div>
             
-            <div className="mt-12 flex justify-center">
+            <div className="projects-view-all">
                 <button 
                     onClick={() => navigate('/projects')}
                     className="btn btn-secondary group flex items-center gap-2"
