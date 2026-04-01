@@ -3,6 +3,16 @@ import { ProjectMeta, ProjectConfig } from '../types/project.types';
 
 const repoCache = new Map<string, ProjectMeta>();
 
+const buildFallbackMeta = (config: ProjectConfig): ProjectMeta => ({
+  name: config.repoName,
+  alias: config.alias,
+  description: config.description,
+  languages: config.techStack,
+  repoUrl: config.repoUrl || '',
+  deployedUrl: config.deployedUrl || config.repoUrl || '',
+  updatedAt: '',
+});
+
 export const useGitHubRepo = (config: ProjectConfig | null) => {
   const [meta, setMeta] = useState<ProjectMeta | null>(
     config ? repoCache.get(config.repoName) || null : null
@@ -27,6 +37,14 @@ export const useGitHubRepo = (config: ProjectConfig | null) => {
 
       if (!isValidPat) {
         console.warn('Valid VITE_GITHUB_PAT missing, fetching repositories anonymously (subject to rate limits).');
+      }
+
+      if (config.isPrivate || !config.repoName) {
+        const fallbackMeta = buildFallbackMeta(config);
+        repoCache.set(config.repoName, fallbackMeta);
+        setMeta(fallbackMeta);
+        setLoading(false);
+        return;
       }
 
       try {
@@ -54,9 +72,9 @@ export const useGitHubRepo = (config: ProjectConfig | null) => {
         const projectMeta: ProjectMeta = {
           name: repoData.name,
           alias: config.alias || repoData.name,
-          description: repoData.description,
-          languages,
-          repoUrl: repoData.html_url,
+          description: repoData.description || config.description,
+          languages: languages.length > 0 ? languages : config.techStack,
+          repoUrl: config.repoUrl || repoData.html_url,
           deployedUrl: config.deployedUrl || repoData.html_url,
           updatedAt: repoData.updated_at,
         };
@@ -64,8 +82,11 @@ export const useGitHubRepo = (config: ProjectConfig | null) => {
         repoCache.set(config.repoName, projectMeta);
         setMeta(projectMeta);
       } catch (err) {
-        console.error(`Error fetching repo ${config.repoName}:`, err);
-        setError(true);
+        console.warn(`GitHub API failed for ${config.repoName}, using local fallback.`, err);
+        const fallbackMeta = buildFallbackMeta(config);
+        repoCache.set(config.repoName, fallbackMeta);
+        setMeta(fallbackMeta);
+        setError(false);
       } finally {
         setLoading(false);
       }

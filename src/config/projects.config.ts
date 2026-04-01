@@ -58,7 +58,7 @@ export const LOCAL_FALLBACK: ProjectConfig[] = [
   },
   {
     repoName: "youtube-video-speed-enhancer",
-    alias: "YouTube Video Speed Enhancer",
+    alias: "YouTube Video Speed Enhancer - Extension",
     description: "A browser extension that enhances YouTube's native playback speed controls, allowing finer-grained speed adjustments beyond YouTube's default limits.",
     techStack: ["JavaScript", "HTML/CSS"],
     deployedUrl: undefined,
