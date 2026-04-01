@@ -19,4 +19,5 @@ export interface ProjectMeta {
   updatedAt: string;
   readme?: string;               // Optional full README content
   readmeUrl?: string;            // Optional direct URL to the markdown
+  defaultBranch?: string;        // Branch name for media resolution (e.g. 'main')
 }

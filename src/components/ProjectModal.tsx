@@ -45,7 +45,20 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
 
         <div className="modal-content markdown-body">
           {project.readme ? (
-            <ReactMarkdown remarkPlugins={[remarkGfm]}>
+            <ReactMarkdown 
+              remarkPlugins={[remarkGfm]}
+              components={{
+                img: ({ node, src, ...props }) => {
+                  if (!src) return null;
+                  let finalSrc = src;
+                  if (!src.startsWith('http') && !src.startsWith('data:')) {
+                    const cleanUri = src.replace(/^\.\/|^\//, '');
+                    finalSrc = `https://raw.githubusercontent.com/AnisHerdev/${project.name}/${project.defaultBranch || 'main'}/${cleanUri}`;
+                  }
+                  return <img src={finalSrc} {...props} style={{ maxWidth: '100%', borderRadius: '12px' }} />;
+                }
+              }}
+            >
               {project.readme}
             </ReactMarkdown>
           ) : (

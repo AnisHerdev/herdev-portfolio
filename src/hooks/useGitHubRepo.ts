@@ -82,6 +82,7 @@ export const useGitHubRepo = (config: ProjectConfig | null) => {
           deployedUrl: config.deployedUrl || repoData.html_url,
           updatedAt: repoData.updated_at,
           readme: readmeData || undefined,
+          defaultBranch: repoData.default_branch || 'main',
         };
 
         repoCache.set(config.repoName, projectMeta);
