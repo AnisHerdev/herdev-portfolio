@@ -36,18 +36,8 @@ const ProjectsPage: React.FC = () => {
   return (
     <section className="section !pt-32 min-h-screen">
       <div className="container px-4">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-12">
-          <button 
-            onClick={() => navigate(-1)}
-            className="btn btn-secondary !py-2 !px-6 flex items-center gap-2 text-sm font-bold group self-start md:self-auto"
-            style={{ cursor: 'pointer' }}
-          >
-            <i className="fas fa-arrow-left transition-transform group-hover:-translate-x-1"></i> Back
-          </button>
-          
+        <div className="flex flex-col items-center mb-12 text-center">
           <h1 className="section-title !mb-0 !text-3xl md:!text-5xl">All Projects</h1>
-          
-          <div className="hidden md:block w-[100px]" /> {/** Balancing spacer */}
         </div>
 
         {loading ? (

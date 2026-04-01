@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Hero = () => {
   return (
@@ -15,8 +16,8 @@ const Hero = () => {
           <a href="https://linkedin.com/in/herdev-anish-1678452a9/" className="glass-icon" target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin"></i></a>
         </div>
         <div className="cta-group">
-          <a href="#projects" className="btn btn-primary glass">View Projects</a>
-          <a href="#contact" className="btn btn-secondary glass">Contact Me</a>
+          <Link to="/#projects" className="btn btn-primary glass">View Projects</Link>
+          <Link to="/#contact" className="btn btn-secondary glass">Contact Me</Link>
         </div>
       </div>
     </section>

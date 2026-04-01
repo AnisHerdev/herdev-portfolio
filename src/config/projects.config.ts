@@ -31,7 +31,7 @@ export const LOCAL_FALLBACK: ProjectConfig[] = [
     alias: "PPF Projection Calculator",
     description: "Real-time PPF financial visualiser with custom compounding interest logic, type-safe TypeScript financial algorithms, Recharts integration, and deployed on Firebase Hosting.",
     techStack: ["React", "TypeScript", "Tailwind CSS", "Firebase"],
-    deployedUrl: undefined,
+    deployedUrl: "https://herdev-ppf-projection-calculator.web.app/",
     repoUrl: "https://github.com/AnisHerdev/ppf-projection-calculator-react",
     isPrivate: false,
     featured: true
