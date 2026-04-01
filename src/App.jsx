@@ -4,6 +4,7 @@ import BgBlobs from './components/BgBlobs';
 import Navbar from './components/Navbar';
 import MobileNav from './components/MobileNav';
 import Footer from './components/Footer';
+import Terminal from './components/Terminal/Terminal';
 
 // Lazy load pages for optimization
 const HomePage = lazy(() => import('./pages/HomePage'));
@@ -60,6 +61,7 @@ const App = () => {
         </Suspense>
       </main>
       <Footer />
+      <Terminal />
     </Router>
   );
 };
