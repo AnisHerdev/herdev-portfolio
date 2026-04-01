@@ -45,9 +45,22 @@ export const useProjectConfig = () => {
 
           const data = await response.json();
           const firstFile = Object.values(data.files)[0] as { content: string };
-          const projects = JSON.parse(firstFile.content) as ProjectConfig[];
+          const gistEntries = JSON.parse(firstFile.content) as Partial<ProjectConfig>[];
+          const merged = gistEntries
+            .map((gistEntry) => {
+              const fallback = LOCAL_FALLBACK.find(f => f.repoName === gistEntry.repoName);
+              if (!fallback) return null;
+              return {
+                ...fallback,
+                ...(gistEntry.alias && { alias: gistEntry.alias }),
+                ...(gistEntry.deployedUrl !== undefined && { deployedUrl: gistEntry.deployedUrl }),
+                ...(gistEntry.isPrivate !== undefined && { isPrivate: gistEntry.isPrivate }),
+                ...(gistEntry.featured !== undefined && { featured: gistEntry.featured }),
+              };
+            })
+            .filter((p): p is ProjectConfig => p !== null);
 
-          return { projects, source: 'gist', loading: false };
+          return { projects: merged.length > 0 ? merged : LOCAL_FALLBACK, source: 'gist', loading: false };
         } catch (error) {
           console.error('Error fetching project config from Gist, falling back to local:', error);
           return { projects: LOCAL_FALLBACK, source: 'fallback', loading: false };

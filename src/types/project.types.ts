@@ -1,8 +1,12 @@
 export interface ProjectConfig {
-  repoName: string;              // exact GitHub repo name
-  alias?: string;                // optional display name override
-  deployedUrl?: string;          // optional, falls back to github repo URL
-  featured?: boolean;            // if true, show on landing page grid
+  repoName: string;          // exact GitHub repo name, empty string if private with no repo
+  alias: string;             // display name (required, not optional)
+  description: string;       // hardcoded fallback description
+  techStack: string[];       // e.g. ["Python", "TensorFlow", "GitHub Actions"]
+  deployedUrl?: string;      // optional — only set if there is a live hosted demo
+  repoUrl?: string;          // optional — omit if isPrivate: true
+  isPrivate: boolean;        // if true, never show GitHub icon or link
+  featured: boolean;         // required, not optional
 }
 
 export interface ProjectMeta {
