@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useProjectConfig } from '../hooks/useProjectConfig';
 import { ProjectCardWrapper, ProjectCardSkeleton } from '../components/ProjectCard';
+import ProjectModal from '../components/ProjectModal';
+import { ProjectMeta } from '../types/project.types';
 
 const ProjectsPage: React.FC = () => {
   const { projects, loading } = useProjectConfig();
   const [currentPage, setCurrentPage] = useState(1);
+  const [selectedProject, setSelectedProject] = useState<ProjectMeta | null>(null);
   const itemsPerPage = 6;
 
   // Scroll to top when page changes
@@ -33,7 +36,13 @@ const ProjectsPage: React.FC = () => {
           <>
             <div className="projects-grid">
               {currentProjects.map((project) => (
-                <ProjectCardWrapper key={project.repoName} config={project} size="full" />
+                <ProjectCardWrapper 
+                   key={project.repoName} 
+                   config={project} 
+                   size="full" 
+                   onClick={(meta) => setSelectedProject(meta)}
+                   headingLevel="h2"
+                />
               ))}
             </div>
 
@@ -65,6 +74,13 @@ const ProjectsPage: React.FC = () => {
           </>
         )}
       </div>
+
+      {selectedProject && (
+        <ProjectModal 
+          project={selectedProject} 
+          onClose={() => setSelectedProject(null)} 
+        />
+      )}
     </section>
   );
 };

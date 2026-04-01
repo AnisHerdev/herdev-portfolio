@@ -17,4 +17,6 @@ export interface ProjectMeta {
   repoUrl: string;
   deployedUrl: string;           // deployedUrl from config OR repoUrl
   updatedAt: string;
+  readme?: string;               // Optional full README content
+  readmeUrl?: string;            // Optional direct URL to the markdown
 }

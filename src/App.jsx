@@ -42,12 +42,14 @@ const App = () => {
       <BgBlobs />
       <Navbar />
       <MobileNav />
-      <Suspense fallback={<PageLoader />}>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/projects" element={<ProjectsPage />} />
-        </Routes>
-      </Suspense>
+      <main>
+        <Suspense fallback={<PageLoader />}>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/projects" element={<ProjectsPage />} />
+          </Routes>
+        </Suspense>
+      </main>
       <Footer />
     </Router>
   );

@@ -49,12 +49,15 @@ export const useGitHubRepo = (config: ProjectConfig | null) => {
 
       try {
         const headers: HeadersInit = isValidPat ? { Authorization: `Bearer ${pat}` } : {};
-        const [repoRes, langRes] = await Promise.all([
+        const [repoRes, langRes, readmeRes] = await Promise.all([
           fetch(`https://api.github.com/repos/AnisHerdev/${config.repoName}`, {
             headers,
           }),
           fetch(`https://api.github.com/repos/AnisHerdev/${config.repoName}/languages`, {
             headers,
+          }),
+          fetch(`https://api.github.com/repos/AnisHerdev/${config.repoName}/readme`, {
+            headers: { ...headers, Accept: 'application/vnd.github.v3.raw' },
           }),
         ]);
 
@@ -62,6 +65,7 @@ export const useGitHubRepo = (config: ProjectConfig | null) => {
 
         const repoData = await repoRes.json();
         const langData = await langRes.json();
+        const readmeData = readmeRes.ok ? await readmeRes.text() : null;
 
         // Sort languages by bytes and take top 3
         const languages = Object.entries(langData)
@@ -77,6 +81,7 @@ export const useGitHubRepo = (config: ProjectConfig | null) => {
           repoUrl: config.repoUrl || repoData.html_url,
           deployedUrl: config.deployedUrl || repoData.html_url,
           updatedAt: repoData.updated_at,
+          readme: readmeData || undefined,
         };
 
         repoCache.set(config.repoName, projectMeta);
