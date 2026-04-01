@@ -37,9 +37,11 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
             <a href={project.repoUrl} target="_blank" rel="noopener noreferrer" className="btn btn-secondary !py-2 !px-4 !text-xs">
               <i className="fab fa-github"></i> Repository
             </a>
-            <a href={project.deployedUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary !py-2 !px-4 !text-xs">
-              <i className="fas fa-external-link-alt"></i> Live Demo
-            </a>
+            {project.deployedUrl && (
+              <a href={project.deployedUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary !py-2 !px-4 !text-xs">
+                <i className="fas fa-external-link-alt"></i> Live Demo
+              </a>
+            )}
           </div>
         </div>
 

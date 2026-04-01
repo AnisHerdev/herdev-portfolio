@@ -15,7 +15,7 @@ export interface ProjectMeta {
   description: string | null;
   languages: string[];           // top 3 by bytes
   repoUrl: string;
-  deployedUrl: string;           // deployedUrl from config OR repoUrl
+  deployedUrl?: string;          // Only set if a live demo exists
   updatedAt: string;
   readme?: string;               // Optional full README content
   readmeUrl?: string;            // Optional direct URL to the markdown

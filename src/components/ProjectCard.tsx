@@ -75,15 +75,17 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ meta, size = 'compact', onCli
         )}
 
         <div className="mt-auto pt-6">
-          <a 
-            href={meta.deployedUrl} 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="link"
-            onClick={(e) => e.stopPropagation()}
-          >
-            View Demo <i className="fas fa-arrow-right"></i>
-          </a>
+          {meta.deployedUrl && (
+            <a 
+              href={meta.deployedUrl} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="link"
+              onClick={(e) => e.stopPropagation()}
+            >
+              View Demo <i className="fas fa-arrow-right"></i>
+            </a>
+          )}
         </div>
       </div>
     </div>

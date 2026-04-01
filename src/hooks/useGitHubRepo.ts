@@ -9,7 +9,7 @@ const buildFallbackMeta = (config: ProjectConfig): ProjectMeta => ({
   description: config.description,
   languages: config.techStack,
   repoUrl: config.repoUrl || '',
-  deployedUrl: config.deployedUrl || config.repoUrl || '',
+  deployedUrl: config.deployedUrl,
   updatedAt: '',
 });
 
@@ -79,7 +79,7 @@ export const useGitHubRepo = (config: ProjectConfig | null) => {
           description: repoData.description || config.description,
           languages: languages.length > 0 ? languages : config.techStack,
           repoUrl: config.repoUrl || repoData.html_url,
-          deployedUrl: config.deployedUrl || repoData.html_url,
+          deployedUrl: config.deployedUrl, // Only set if config has it
           updatedAt: repoData.updated_at,
           readme: readmeData || undefined,
           defaultBranch: repoData.default_branch || 'main',
