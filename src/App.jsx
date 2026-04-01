@@ -1,11 +1,20 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import BgBlobs from './components/BgBlobs';
 import Navbar from './components/Navbar';
 import MobileNav from './components/MobileNav';
 import Footer from './components/Footer';
-import HomePage from './pages/HomePage';
-import ProjectsPage from './pages/ProjectsPage';
+
+// Lazy load pages for optimization
+const HomePage = lazy(() => import('./pages/HomePage'));
+const ProjectsPage = lazy(() => import('./pages/ProjectsPage'));
+
+// Clean loader for Suspense
+const PageLoader = () => (
+  <div className="min-h-screen flex items-center justify-center">
+    <div className="glass p-8 animate-pulse text-white/50">Loading...</div>
+  </div>
+);
 
 const ScrollToHash = () => {
   const { hash, pathname } = useLocation();
@@ -33,10 +42,12 @@ const App = () => {
       <BgBlobs />
       <Navbar />
       <MobileNav />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/projects" element={<ProjectsPage />} />
-      </Routes>
+      <Suspense fallback={<PageLoader />}>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/projects" element={<ProjectsPage />} />
+        </Routes>
+      </Suspense>
       <Footer />
     </Router>
   );

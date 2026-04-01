@@ -1,25 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useProjectConfig } from '../hooks/useProjectConfig';
-import { useGitHubRepo } from '../hooks/useGitHubRepo';
-import ProjectCard from '../components/ProjectCard';
-import { ProjectConfig } from '../types/project.types';
-
-const ProjectCardWrapper: React.FC<{ config: ProjectConfig }> = ({ config }) => {
-  const { meta, loading, error } = useGitHubRepo(config);
-
-  if (loading) return <div className="project-card glass bg-white/[0.02] border-white/5 animate-pulse p-8" />;
-  if (error || !meta) return (
-    <div className="glass p-8 text-center text-sm text-white/30 border-white/5 flex items-center justify-center">
-        Repo Error: {config.alias || config.repoName}
-    </div>
-  );
-
-  return <ProjectCard meta={meta} size="full" />;
-};
+import { ProjectCardWrapper, ProjectCardSkeleton } from '../components/ProjectCard';
 
 const ProjectsPage: React.FC = () => {
-  const navigate = useNavigate();
   const { projects, loading } = useProjectConfig();
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
@@ -43,14 +26,14 @@ const ProjectsPage: React.FC = () => {
         {loading ? (
           <div className="projects-grid">
             {Array.from({ length: 6 }).map((_, i) => (
-              <div key={i} className="project-card glass bg-white/[0.02] border-white/5 animate-pulse" />
+              <ProjectCardSkeleton key={i} />
             ))}
           </div>
         ) : (
           <>
             <div className="projects-grid">
               {currentProjects.map((project) => (
-                <ProjectCardWrapper key={project.repoName} config={project} />
+                <ProjectCardWrapper key={project.repoName} config={project} size="full" />
               ))}
             </div>
 

@@ -1,38 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useProjectConfig } from '../hooks/useProjectConfig';
-import { useGitHubRepo } from '../hooks/useGitHubRepo';
-import ProjectCard from './ProjectCard';
-import { ProjectConfig } from '../types/project.types';
-
-const SkeletonCard = () => (
-  <div className="project-card glass bg-white/[0.02] border-white/5 animate-pulse flex flex-col p-8">
-    <div className="flex gap-2 mb-4">
-        <div className="h-5 bg-white/10 rounded-full w-16"></div>
-        <div className="h-5 bg-white/10 rounded-full w-16"></div>
-    </div>
-    <div className="h-8 bg-white/10 rounded w-3/4 mb-4"></div>
-    <div className="h-4 bg-white/10 rounded w-full mb-2"></div>
-    <div className="h-4 bg-white/10 rounded w-5/6"></div>
-    <div className="mt-auto pt-6">
-        <div className="h-3 bg-white/10 rounded w-20"></div>
-    </div>
-  </div>
-);
-
-const ProjectCardWrapper: React.FC<{ config: ProjectConfig }> = ({ config }) => {
-  const { meta, loading, error } = useGitHubRepo(config);
-
-  if (loading) return <SkeletonCard />;
-  if (error || !meta) return (
-    <div className="glass p-8 text-center text-sm text-white/50 border-white/5 flex flex-col items-center justify-center min-h-[220px]">
-        <i className="fas fa-exclamation-triangle mb-2 text-[#ec4899] opacity-50 text-xl"></i>
-        <span>Repo fetch failed: {config.alias || config.repoName}</span>
-    </div>
-  );
-
-  return <ProjectCard meta={meta} size="compact" />;
-};
+import { ProjectCardWrapper, ProjectCardSkeleton } from './ProjectCard';
 
 const ProjectsGrid: React.FC = () => {
     const navigate = useNavigate();
@@ -44,10 +13,10 @@ const ProjectsGrid: React.FC = () => {
         <div className="projects-grid-container">
             <div className="projects-grid">
                 {loading ? (
-                    Array.from({ length: 3 }).map((_, i) => <SkeletonCard key={i} />)
+                    Array.from({ length: 3 }).map((_, i) => <ProjectCardSkeleton key={i} />)
                 ) : (
                     featuredProjects.map((project) => (
-                        <ProjectCardWrapper key={project.repoName} config={project} />
+                        <ProjectCardWrapper key={project.repoName} config={project} size="compact" />
                     ))
                 )}
             </div>

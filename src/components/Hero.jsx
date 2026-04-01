@@ -6,7 +6,7 @@ const Hero = () => {
     <section id="home" className="hero">
       <div className="hero-container glass">
         <div className="hero-image">
-          <img src="/assets/profile.jpg" alt="S A Herdev Anish" />
+          <img src="/assets/profile.jpg" alt="S A Herdev Anish" width="150" height="150" />
         </div>
         <h1>Hi, I'm <span>S A Herdev Anish</span></h1>
         <p className="tagline">B.Tech (Hons.) CSE • AIML Enthusiast • Fintech Minor</p>

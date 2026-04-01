@@ -378,7 +378,7 @@ h1 span {
   font-size: clamp(2rem, 5vw, 3rem);
   font-weight: 800;
   text-align: center;
-  margin-bottom: var(--space-3xl);
+  margin-bottom: var(--space-2xl);
   letter-spacing: -1px;
 }
 
@@ -404,12 +404,6 @@ h1 span {
   transform: translateX(4px);
 }
 
-.cta-separator {
-  border-top: 1px solid var(--glass-border);
-  width: 200px;
-  margin-bottom: var(--space-lg);
-  opacity: 0.5;
-}
 
 .about-card {
   padding: var(--space-xl);
