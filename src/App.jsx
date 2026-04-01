@@ -1,4 +1,4 @@
-import React, { useEffect, lazy, Suspense } from 'react';
+import React, { useEffect, useState, lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import BgBlobs from './components/BgBlobs';
 import Navbar from './components/Navbar';
@@ -36,12 +36,21 @@ const ScrollToHash = () => {
 };
 
 const App = () => {
+  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'dark');
+
+  useEffect(() => {
+    document.body.classList.toggle('light-mode', theme === 'light');
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => setTheme(prev => prev === 'dark' ? 'light' : 'dark');
+
   return (
     <Router>
       <ScrollToHash />
       <BgBlobs />
-      <Navbar />
-      <MobileNav />
+      <Navbar theme={theme} toggleTheme={toggleTheme} />
+      <MobileNav theme={theme} toggleTheme={toggleTheme} />
       <main>
         <Suspense fallback={<PageLoader />}>
           <Routes>

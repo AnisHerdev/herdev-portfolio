@@ -19,14 +19,19 @@ const MobileNav = () => {
         <i className="fas fa-lightbulb"></i>
         <span>Skills</span>
       </Link>
-      <Link 
-        to="/#projects" 
-        className={`mobile-nav-link ${isProjectsPage ? 'animate-fade-in' : ''}`}
-        style={isProjectsPage ? { color: 'var(--blue-glow)', textShadow: '0 0 10px rgba(59, 130, 246, 0.5)' } : {}}
-      >
-        <i className={isProjectsPage ? "fas fa-arrow-left" : "fas fa-code"}></i>
-        <span>{isProjectsPage ? "Back" : "Work"}</span>
-      </Link>
+      
+      {isProjectsPage ? (
+        <Link to="/#projects" className="mobile-nav-link animate-fade-in" style={{ color: 'var(--blue-glow)' }}>
+          <i className="fas fa-arrow-left"></i>
+          <span className="!text-sm">Back</span>
+        </Link>
+      ) : (
+        <Link to="/#projects" className="mobile-nav-link">
+          <i className="fas fa-code"></i>
+          <span>Work</span>
+        </Link>
+      )}
+
       <Link to="/#contact" className="mobile-nav-link">
         <i className="fas fa-envelope"></i>
         <span>Contact</span>

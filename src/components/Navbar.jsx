@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
-const Navbar = () => {
+const Navbar = ({ theme, toggleTheme }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const isProjectsPage = location.pathname === '/projects';
 
   return (
-    <header>
+    <header className="animate-fade-in">
       <nav className="navbar glass">
         <Link to="/#home" className="logo">S A Herdev Anish</Link>
         
@@ -35,6 +35,14 @@ const Navbar = () => {
               <i className="fas fa-arrow-left"></i> <span>Back</span>
             </button>
           )}
+
+          <button 
+            className="theme-toggle glass" 
+            onClick={toggleTheme} 
+            aria-label="Toggle theme"
+          >
+            <i className={`fas ${theme === 'dark' ? 'fa-sun' : 'fa-moon'}`}></i>
+          </button>
         </div>
       </nav>
     </header>

@@ -25,6 +25,65 @@
   --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+.light-mode {
+  --bg-dark: #fbfbfc;
+  --text-primary: #1d1d1f;
+  --text-secondary: rgba(0, 0, 0, 0.65);
+  --text-muted: rgba(0, 0, 0, 0.45);
+
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(0, 0, 0, 0.08);
+  --glass-blur: blur(20px);
+  
+  --blue-glow: #0071e3;
+  --pink-glow: #ff2d55;
+  --green-glow: #34c759;
+}
+
+body {
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+.light-mode .blob {
+  opacity: 0.15;
+}
+
+.light-mode h1 span, .light-mode .logo {
+  background: linear-gradient(to right, var(--text-primary), var(--text-secondary));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.light-mode .glass {
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.05);
+}
+
+.light-mode .project-card::before {
+  opacity: 0.3;
+}
+
+.light-mode .project-modal-overlay {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.light-mode .modal-close-btn {
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: #1d1d1f;
+}
+
+.light-mode .btn-primary {
+  background: #1d1d1f !important;
+  color: #fff !important;
+}
+
+.light-mode .btn-secondary {
+  background: rgba(0, 0, 0, 0.03) !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+  color: #1d1d1f !important;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -136,6 +195,35 @@ header {
   border-radius: 100px;
 }
 
+.theme-toggle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg);
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.theme-toggle:hover {
+  transform: rotate(12deg) scale(1.1);
+  border-color: var(--blue-glow);
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
+}
+
+.theme-toggle-mobile {
+  border: none;
+  background: none;
+  color: inherit;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+}
+
 .logo {
   font-weight: 800;
   text-decoration: none;
@@ -143,6 +231,7 @@ header {
   letter-spacing: 2px;
   background: linear-gradient(to right, #fff, rgba(255, 255, 255, 0.6));
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -256,6 +345,7 @@ h1 {
 h1 span {
   background: linear-gradient(45deg, var(--blue-glow), var(--pink-glow));
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
