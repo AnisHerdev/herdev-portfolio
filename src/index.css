@@ -1096,3 +1096,10 @@ footer p {
     border-radius: 0;
   }
 }
+
+/* ── Terminal page chrome hiding ──────────────────────────────────────────── */
+.hide-chrome header,
+.hide-chrome nav.mobile-nav,
+.hide-chrome footer {
+  display: none !important;
+}

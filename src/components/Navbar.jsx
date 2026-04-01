@@ -88,6 +88,29 @@ const Navbar = ({ theme, toggleTheme }) => {
             >
               <i className={`fas ${theme === 'dark' ? 'fa-sun' : 'fa-moon'}`}></i>
             </button>
+
+            {/* Terminal shortcut */}
+            <button
+              onClick={() => navigate('/terminal')}
+              aria-label="Open Terminal"
+              style={{
+                fontFamily: 'monospace',
+                fontSize: 13,
+                fontWeight: 700,
+                color: '#28C840',
+                background: 'rgba(40,200,64,0.08)',
+                border: '1px solid rgba(40,200,64,0.25)',
+                borderRadius: 6,
+                padding: '4px 10px',
+                cursor: 'pointer',
+                transition: 'background 150ms',
+                flexShrink: 0,
+              }}
+              onMouseEnter={e => (e.currentTarget.style.background = 'rgba(40,200,64,0.15)')}
+              onMouseLeave={e => (e.currentTarget.style.background = 'rgba(40,200,64,0.08)')}
+            >
+              {'>_'}
+            </button>
           </div>
         </nav>
 

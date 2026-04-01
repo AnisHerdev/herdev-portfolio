@@ -6,8 +6,9 @@ import MobileNav from './components/MobileNav';
 import Footer from './components/Footer';
 
 // Lazy load pages for optimization
-const HomePage = lazy(() => import('./pages/HomePage'));
+const HomePage     = lazy(() => import('./pages/HomePage'));
 const ProjectsPage = lazy(() => import('./pages/ProjectsPage'));
+const TerminalPage = lazy(() => import('./pages/TerminalPage'));
 
 // Clean loader for Suspense
 const PageLoader = () => (
@@ -23,9 +24,7 @@ const ScrollToHash = () => {
     if (hash) {
       const element = document.getElementById(hash.replace('#', ''));
       if (element) {
-        setTimeout(() => {
-          element.scrollIntoView({ behavior: 'smooth' });
-        }, 100);
+        setTimeout(() => { element.scrollIntoView({ behavior: 'smooth' }); }, 100);
       }
     } else if (pathname === '/') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -33,6 +32,26 @@ const ScrollToHash = () => {
   }, [hash, pathname]);
 
   return null;
+};
+
+// Conditionally renders site chrome based on route
+const SiteChrome = ({ theme, toggleTheme }) => {
+  const location = useLocation();
+  const isTerminal = location.pathname === '/terminal';
+  if (isTerminal) return null;
+  return (
+    <>
+      <BgBlobs />
+      <Navbar theme={theme} toggleTheme={toggleTheme} />
+      <MobileNav theme={theme} toggleTheme={toggleTheme} />
+    </>
+  );
+};
+
+const SiteFooter = () => {
+  const location = useLocation();
+  if (location.pathname === '/terminal') return null;
+  return <Footer />;
 };
 
 const App = () => {
@@ -48,18 +67,17 @@ const App = () => {
   return (
     <Router>
       <ScrollToHash />
-      <BgBlobs />
-      <Navbar theme={theme} toggleTheme={toggleTheme} />
-      <MobileNav theme={theme} toggleTheme={toggleTheme} />
+      <SiteChrome theme={theme} toggleTheme={toggleTheme} />
       <main>
         <Suspense fallback={<PageLoader />}>
           <Routes>
-            <Route path="/" element={<HomePage />} />
+            <Route path="/"         element={<HomePage />} />
             <Route path="/projects" element={<ProjectsPage />} />
+            <Route path="/terminal" element={<TerminalPage />} />
           </Routes>
         </Suspense>
       </main>
-      <Footer />
+      <SiteFooter />
     </Router>
   );
 };
