@@ -45,21 +45,34 @@ export const useProjectConfig = () => {
           const data = await response.json();
           const firstFile = Object.values(data.files)[0] as { content: string };
           const gistEntries = JSON.parse(firstFile.content) as Partial<ProjectConfig>[];
-          const merged = gistEntries
-            .map((gistEntry) => {
-              const fallback = LOCAL_FALLBACK.find(f => f.repoName === gistEntry.repoName);
-              if (!fallback) return null;
-              return {
-                ...fallback,
-                ...(gistEntry.alias && { alias: gistEntry.alias }),
-                ...(gistEntry.deployedUrl !== undefined && { deployedUrl: gistEntry.deployedUrl }),
-                ...(gistEntry.isPrivate !== undefined && { isPrivate: gistEntry.isPrivate }),
-                ...(gistEntry.featured !== undefined && { featured: gistEntry.featured }),
-              };
-            })
-            .filter((p): p is ProjectConfig => p !== null);
-            console.log(merged)
-          return { projects: merged.length > 0 ? merged : LOCAL_FALLBACK, source: 'gist', loading: false };
+
+          const merged: ProjectConfig[] = gistEntries.map((gistEntry) => {
+            // Look for enrichment data in LOCAL_FALLBACK — optional, never a gate
+            const fallback = LOCAL_FALLBACK.find(f => f.repoName === gistEntry.repoName);
+
+            return {
+              // Base: LOCAL_FALLBACK enrichment if available, else safe defaults
+              repoName:    gistEntry.repoName    ?? '',
+              alias:       gistEntry.alias       ?? fallback?.alias       ?? gistEntry.repoName ?? '',
+              description: fallback?.description ?? gistEntry.description ?? '',
+              techStack:   fallback?.techStack   ?? gistEntry.techStack   ?? [],
+              isPrivate:   gistEntry.isPrivate   ?? fallback?.isPrivate   ?? false,
+              featured:    gistEntry.featured    ?? fallback?.featured     ?? false,
+              // Optional fields — only set if defined
+              ...(gistEntry.deployedUrl ? { deployedUrl: gistEntry.deployedUrl }
+                  : fallback?.deployedUrl ? { deployedUrl: fallback.deployedUrl }
+                  : {}),
+              ...(gistEntry.repoUrl ? { repoUrl: gistEntry.repoUrl }
+                  : fallback?.repoUrl ? { repoUrl: fallback.repoUrl }
+                  : {}),
+            };
+          });
+
+          return {
+            projects: merged.length > 0 ? merged : LOCAL_FALLBACK,
+            source: 'gist',
+            loading: false
+          };
         } catch (error) {
           console.error('Error fetching project config from Gist, falling back to local:', error);
           return { projects: LOCAL_FALLBACK, source: 'fallback', loading: false };
