@@ -3,6 +3,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import registry, { COMMAND_NAMES } from '../components/TerminalOS/commands/index';
 import { TypewriterPayload } from '../components/TerminalOS/commands/whoami';
+import { renderWelcomeSplash } from '../components/TerminalOS/commands/welcome';
 
 export interface HistoryEntry {
   id: string;
@@ -29,9 +30,15 @@ function saveCmdHistory(arr: string[]) {
   sessionStorage.setItem(SESSION_CMD_HISTORY, JSON.stringify(arr));
 }
 
+const WELCOME_ENTRY = {
+  id: 'welcome',
+  command: '',
+  output: renderWelcomeSplash(),
+};
+
 export function useTerminalState(): UseTerminalStateReturn {
   const navigate = useNavigate();
-  const [history, setHistory] = useState<HistoryEntry[]>([]);
+  const [history, setHistory] = useState<HistoryEntry[]>([WELCOME_ENTRY]);
   const [input,   setInput]   = useState('');
   const [cmdHistory, setCmdHistory] = useState<string[]>(loadCmdHistory);
   const [historyIdx, setHistoryIdx] = useState(-1);

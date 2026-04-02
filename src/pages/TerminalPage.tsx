@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useBootSequence } from '../hooks/useBootSequence';
 import MacDesktop from '../components/TerminalOS/MacDesktop';
 import MacWindow from '../components/TerminalOS/MacWindow';
+import UbuntuBoot from '../components/TerminalOS/UbuntuBoot';
 
 const SESSION_BOOTED = 'terminal_hasBooted';
 
@@ -53,9 +54,26 @@ const TerminalPage: React.FC = () => {
     );
   }
 
+  // ── Phase: ubuntu-boot ────────────────────────────────────────────────────
+  if (phase === 'ubuntu-boot') {
+    return (
+      <div style={{ width: '100vw', height: '100vh', background: '#000' }}>
+        {/* MacDesktop pre-rendered but hidden so it's ready when UbuntuBoot fades */}
+        <div style={{ opacity: 0, position: 'absolute', inset: 0, pointerEvents: 'none' }}>
+          <MacDesktop />
+        </div>
+        <UbuntuBoot />
+      </div>
+    );
+  }
+
   // ── Phase: desktop (no window yet) ─────────────────────────────────────────
   if (phase === 'desktop') {
-    return <MacDesktop />;
+    return (
+      <div style={{ opacity: 1, transition: 'opacity 400ms ease' }}>
+        <MacDesktop />
+      </div>
+    );
   }
 
   // ── Phase: window-slide + ready ────────────────────────────────────────────

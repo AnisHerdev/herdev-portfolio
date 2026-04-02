@@ -40,9 +40,8 @@ export const useProjectConfig = () => {
               Accept: 'application/vnd.github.v3+json',
             },
           });
-
           if (!response.ok) throw new Error('Fetch failed');
-
+          
           const data = await response.json();
           const firstFile = Object.values(data.files)[0] as { content: string };
           const gistEntries = JSON.parse(firstFile.content) as Partial<ProjectConfig>[];
@@ -59,7 +58,7 @@ export const useProjectConfig = () => {
               };
             })
             .filter((p): p is ProjectConfig => p !== null);
-
+            console.log(merged)
           return { projects: merged.length > 0 ? merged : LOCAL_FALLBACK, source: 'gist', loading: false };
         } catch (error) {
           console.error('Error fetching project config from Gist, falling back to local:', error);

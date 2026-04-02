@@ -71,12 +71,14 @@ const TerminalOutput: React.FC<TerminalOutputProps> = ({ history }) => {
         const tw = isTypewriter(raw);
         return (
           <div key={entry.id} style={{ marginBottom: 8 }}>
-            {/* Prompt line */}
-            <div style={{ fontFamily: 'monospace', fontSize: 13, marginBottom: 2 }}>
-              <span style={{ color: '#28C840' }}>herdev@portfolio ~ %</span>
-              {' '}
-              <span style={{ color: '#fff' }}>{entry.command}</span>
-            </div>
+            {/* Prompt line — hidden for entries with no command (e.g. welcome splash) */}
+            {entry.command !== '' && (
+              <div style={{ fontFamily: 'monospace', fontSize: 13, marginBottom: 2 }}>
+                <span style={{ color: '#28C840' }}>herdev@portfolio ~ %</span>
+                {' '}
+                <span style={{ color: '#fff' }}>{entry.command}</span>
+              </div>
+            )}
             {/* Output */}
             {raw != null && (
               tw
