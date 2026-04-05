@@ -47,27 +47,31 @@ const ProjectsPage: React.FC = () => {
             </div>
 
             {totalPages > 1 && (
-              <div className="mt-16 flex items-center justify-center gap-6">
+              <div className="pagination-container">
                 <button
                   disabled={currentPage === 1}
                   onClick={() => setCurrentPage(p => p - 1)}
-                  className="glass flex items-center justify-center w-12 h-12 rounded-full disabled:opacity-20 disabled:cursor-not-allowed hover:bg-white/10 transition-all border-white/10"
-                  style={{ cursor: currentPage === 1 ? 'default' : 'pointer' }}
+                  className="pagination-btn"
+                  aria-label="Previous Page"
                 >
-                  <i className="fas fa-chevron-left text-sm"></i>
+                  <i className="fas fa-chevron-left"></i>
                 </button>
                 
-                <span className="text-xs font-bold uppercase tracking-widest text-white/40">
-                   Page {currentPage} of {totalPages}
-                </span>
+                <div className="page-indicator">
+                  <span className="page-indicator-label">Projects</span>
+                  <div className="page-indicator-numbers">
+                    <span className="current-page">{currentPage.toString().padStart(2, '0')}</span>
+                    <span className="total-pages"> / {totalPages.toString().padStart(2, '0')}</span>
+                  </div>
+                </div>
 
                 <button
                   disabled={currentPage === totalPages}
                   onClick={() => setCurrentPage(p => p + 1)}
-                  className="glass flex items-center justify-center w-12 h-12 rounded-full disabled:opacity-20 disabled:cursor-not-allowed hover:bg-white/10 transition-all border-white/10"
-                  style={{ cursor: currentPage === totalPages ? 'default' : 'pointer' }}
+                  className="pagination-btn"
+                  aria-label="Next Page"
                 >
-                  <i className="fas fa-chevron-right text-sm"></i>
+                  <i className="fas fa-chevron-right"></i>
                 </button>
               </div>
             )}
