@@ -95,11 +95,11 @@ body {
 }
 
 .light-mode .project-detail-overlay {
-  background: rgba(251, 251, 252, 0.1);
+  background: rgba(251, 251, 252, 0.85); /* More opaque backdrop for readability */
 }
 
 .light-mode .project-detail-card {
-  background: var(--card-bg-light);
+  background: #ffffff; /* Solid white for maximum readability in the detail view */
   border: 1px solid rgba(0, 0, 0, 0.05);
   box-shadow: 0 40px 120px rgba(0, 0, 0, 0.22);
 }
