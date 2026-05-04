@@ -31,7 +31,7 @@ const ProjectsPage: React.FC = () => {
   };
 
   return (
-    <section className="section !pt-32 min-h-screen">
+    <section className="section projects-page-section min-h-screen">
       <div className="container px-4">
         <div className="flex flex-col items-center mb-12 text-center">
           <h1 className="section-title !mb-0 !text-3xl md:!text-5xl">All Projects</h1>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import rehypeRaw from 'rehype-raw';
 import { useProjectConfig } from '../hooks/useProjectConfig';
 import { useGitHubRepo } from '../hooks/useGitHubRepo';
 import { ProjectConfig, ProjectMeta } from '../types/project.types';
@@ -49,22 +50,29 @@ const ProjectDetailPage: React.FC = () => {
   }
 
   return (
-    <div 
-      className="project-detail-overlay" 
-      onClick={(e) => {
-        if (e.target === e.currentTarget) navigate(-1);
-      }}
-    >
-      <section className="section min-h-screen pb-24" style={{ paddingTop: '2rem' }}>
-        <div className="container px-6" style={{ maxWidth: '1100px', margin: '0 auto' }}>
-          <div className="project-detail-card frosted">
-            <button 
-              className="project-close-btn" 
-              onClick={() => navigate(-1)}
-              aria-label="Close project"
-            >
-              <i className="fas fa-times"></i>
-            </button>
+    <div className="project-detail-overlay">
+      <button 
+        className="project-close-btn" 
+        onClick={() => navigate(-1)}
+        aria-label="Close project"
+      >
+        <i className="fas fa-times"></i>
+      </button>
+
+      <div 
+        className="project-detail-scroll-container"
+        onClick={(e) => {
+          if (e.target === e.currentTarget) navigate(-1);
+        }}
+      >
+        <section 
+          className="project-detail-section"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) navigate(-1);
+          }}
+        >
+          <div className="project-detail-wrapper">
+            <div className="project-detail-card frosted">
             
             <div className="project-tag-container !mb-4">
               {meta.languages.map((lang) => (
@@ -91,6 +99,7 @@ const ProjectDetailPage: React.FC = () => {
               {meta.readme ? (
                 <ReactMarkdown 
                   remarkPlugins={[remarkGfm]}
+                  rehypePlugins={[rehypeRaw]}
                   components={{
                     img: ({ node, src, ...props }) => {
                       if (!src) return null;
@@ -115,7 +124,8 @@ const ProjectDetailPage: React.FC = () => {
             </div>
           </div>
         </div>
-      </section>
+        </section>
+      </div>
     </div>
   );
 };

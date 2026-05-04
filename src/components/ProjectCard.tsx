@@ -3,7 +3,7 @@ import { ProjectMeta, ProjectConfig } from '../types/project.types';
 import { useGitHubRepo } from '../hooks/useGitHubRepo';
 
 export const ProjectCardSkeleton = () => (
-  <div className="project-card bg-white/[0.08] border-white/5 animate-pulse flex flex-col p-8">
+  <div className="project-card bg-white/[0.08] border-white/5 animate-pulse flex flex-col">
     <div className="flex gap-2 mb-4">
         <div className="h-5 bg-white/10 rounded-full w-16"></div>
         <div className="h-5 bg-white/10 rounded-full w-16"></div>
