@@ -95,7 +95,7 @@ body {
 }
 
 .light-mode .project-detail-overlay {
-  background: rgba(251, 251, 252, 0.85); /* More opaque backdrop for readability */
+  background: rgba(251, 251, 252, 0.98); /* Opaque background instead of blur for performance */
 }
 
 .light-mode .project-detail-card {
@@ -1037,9 +1037,7 @@ footer p {
 .project-modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(5, 5, 7, 0.85);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
+  background: rgba(5, 5, 7, 0.96); /* Opaque background for performance */
   z-index: 3000;
   display: flex;
   padding: var(--space-md);
@@ -1204,9 +1202,7 @@ footer p {
 .project-detail-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(5, 5, 7, 0.8);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
+  background: rgba(5, 5, 7, 0.95); /* High opacity for performance (no blur) */
   overflow: hidden; /* Prevent overlay scroll */
   display: flex;
   align-items: flex-start;
@@ -1301,7 +1297,7 @@ footer p {
 
 @media (max-width: 768px) {
   .project-detail-overlay {
-    background: rgba(5, 5, 7, 0.9);
+    background: rgba(5, 5, 7, 0.98);
   }
   
   .project-detail-section {
