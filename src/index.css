@@ -1038,8 +1038,8 @@ footer p {
   position: fixed;
   inset: 0;
   background: rgba(5, 5, 7, 0.85);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
   z-index: 3000;
   display: flex;
   padding: var(--space-md);
@@ -1205,8 +1205,8 @@ footer p {
   position: fixed;
   inset: 0;
   background: rgba(5, 5, 7, 0.8);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
   overflow: hidden; /* Prevent overlay scroll */
   display: flex;
   align-items: flex-start;
