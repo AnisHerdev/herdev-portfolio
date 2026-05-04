@@ -4,17 +4,18 @@ import BgBlobs from './components/BgBlobs';
 import Navbar from './components/Navbar';
 import MobileNav from './components/MobileNav';
 import Footer from './components/Footer';
+import { HomePageSkeleton } from './components/LoadingSkeletons';
 
 // Lazy load pages for optimization
 const HomePage     = lazy(() => import('./pages/HomePage'));
 const ProjectsPage = lazy(() => import('./pages/ProjectsPage'));
 const TerminalPage = lazy(() => import('./pages/TerminalPage'));
 
-// Clean loader for Suspense
+// Clean loader for Suspense - full page skeleton matching HomePage structure
 const PageLoader = () => (
-     <div className="min-h-screen flex items-center justify-center">
-      <div className="p-8 animate-pulse" style={{ background: 'var(--card-bg)', border: '1px solid var(--glass-border)', borderRadius: '24px' }}>Loading...</div>
-    </div>
+  <main>
+    <HomePageSkeleton />
+  </main>
 );
 
 const ScrollToHash = () => {
