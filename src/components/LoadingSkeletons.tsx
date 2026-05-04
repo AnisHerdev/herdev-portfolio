@@ -7,8 +7,8 @@ export const LoadingHeroSkeleton = () => (
         <div 
           className="animate-pulse" 
           style={{ 
-            width: '150px', 
-            height: '150px', 
+            width: 'clamp(100px, 25vw, 150px)', 
+            height: 'clamp(100px, 25vw, 150px)', 
             borderRadius: '50%', 
             background: 'var(--glass-bg)',
             border: '1px solid var(--glass-border)'
@@ -18,7 +18,7 @@ export const LoadingHeroSkeleton = () => (
           <div 
             className="animate-pulse" 
             style={{ 
-              width: '280px', 
+              width: 'clamp(180px, 60vw, 280px)', 
               height: '2.5rem', 
               borderRadius: '8px', 
               background: 'var(--glass-bg)' 
@@ -27,7 +27,7 @@ export const LoadingHeroSkeleton = () => (
           <div 
             className="animate-pulse" 
             style={{ 
-              width: '200px', 
+              width: 'clamp(140px, 45vw, 200px)', 
               height: '1rem', 
               borderRadius: '4px', 
               background: 'var(--glass-bg)' 
@@ -37,7 +37,7 @@ export const LoadingHeroSkeleton = () => (
         <div 
           className="animate-pulse" 
           style={{ 
-            width: '400px', 
+            width: 'clamp(280px, 85vw, 400px)', 
             height: '3.5rem', 
             borderRadius: '8px', 
             background: 'var(--glass-bg)' 
@@ -49,8 +49,8 @@ export const LoadingHeroSkeleton = () => (
               key={i}
               className="animate-pulse" 
               style={{ 
-                width: '48px', 
-                height: '48px', 
+                width: 'clamp(40px, 10vw, 48px)', 
+                height: 'clamp(40px, 10vw, 48px)', 
                 borderRadius: '50%', 
                 background: 'var(--glass-bg)',
                 border: '1px solid var(--glass-border)'
@@ -58,11 +58,11 @@ export const LoadingHeroSkeleton = () => (
             />
           ))}
         </div>
-        <div className="flex gap-4">
+        <div className="flex gap-4 flex-wrap justify-center">
           <div 
             className="animate-pulse" 
             style={{ 
-              width: '160px', 
+              width: 'clamp(120px, 40vw, 160px)', 
               height: '48px', 
               borderRadius: '100px', 
               background: 'var(--glass-bg)',
@@ -72,7 +72,7 @@ export const LoadingHeroSkeleton = () => (
           <div 
             className="animate-pulse" 
             style={{ 
-              width: '140px', 
+              width: 'clamp(100px, 35vw, 140px)', 
               height: '48px', 
               borderRadius: '100px', 
               background: 'var(--glass-bg)',
@@ -91,7 +91,7 @@ export const AboutSkeleton = () => (
       <div 
         className="animate-pulse" 
         style={{ 
-          width: '200px', 
+          width: 'clamp(140px, 40vw, 200px)', 
           height: '2rem', 
           borderRadius: '8px', 
           margin: '0 auto 2rem',
@@ -100,7 +100,7 @@ export const AboutSkeleton = () => (
       />
       <div 
         className="about-card frosted"
-        style={{ height: '200px' }}
+        style={{ height: 'clamp(160px, 40vw, 200px)' }}
       />
     </div>
   </section>
@@ -112,7 +112,7 @@ export const SkillsSkeleton = () => (
       <div 
         className="animate-pulse" 
         style={{ 
-          width: '220px', 
+          width: 'clamp(160px, 50vw, 220px)', 
           height: '2rem', 
           borderRadius: '8px', 
           margin: '0 auto 2rem',
@@ -124,7 +124,7 @@ export const SkillsSkeleton = () => (
           <div 
             key={i}
             className="skill-card frosted animate-pulse"
-            style={{ height: '180px' }}
+            style={{ minHeight: 'clamp(140px, 30vw, 180px)' }}
           />
         ))}
       </div>
@@ -138,7 +138,7 @@ export const ProjectsSkeleton = () => (
       <div 
         className="animate-pulse" 
         style={{ 
-          width: '180px', 
+          width: 'clamp(120px, 40vw, 180px)', 
           height: '2rem', 
           borderRadius: '8px', 
           margin: '0 auto 2rem',
@@ -150,7 +150,7 @@ export const ProjectsSkeleton = () => (
           <div 
             key={i}
             className="project-card frosted animate-pulse"
-            style={{ height: '280px' }}
+            style={{ minHeight: 'clamp(220px, 50vw, 280px)' }}
           />
         ))}
       </div>
@@ -162,8 +162,8 @@ export const ContactSkeleton = () => (
   <section id="contact" className="section">
     <div className="container">
       <div 
-        className="contact-card frosted"
-        style={{ height: '250px' }}
+        className="contact-card frosted animate-pulse"
+        style={{ height: 'clamp(200px, 50vw, 250px)' }}
       />
     </div>
   </section>
