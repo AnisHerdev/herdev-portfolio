@@ -5,6 +5,7 @@ const Navbar = ({ theme, toggleTheme }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const isProjectsPage = location.pathname === '/projects';
+  const isProjectDetailPage = location.pathname.startsWith('/project/');
 
   return (
     <header className="animate-fade-in">
@@ -13,73 +14,73 @@ const Navbar = ({ theme, toggleTheme }) => {
           <Link to="/#home" className="logo">S A Herdev Anish</Link>
           
           <div className="flex items-center gap-6">
-          <ul className="nav-links">
-            <li>
-              <Link 
-                to="/#home" 
-                onClick={(e) => {
-                  if (location.pathname === '/') {
-                    e.preventDefault();
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                  }
-                }}
-              >
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link 
-                to="/#about" 
-                onClick={(e) => {
-                  if (location.pathname === '/') {
-                    e.preventDefault();
-                    document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }}
-              >
-                About
-              </Link>
-            </li>
-            <li>
-              <Link 
-                to="/#skills" 
-                onClick={(e) => {
-                  if (location.pathname === '/') {
-                    e.preventDefault();
-                    document.getElementById('skills')?.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }}
-              >
-                Skills
-              </Link>
-            </li>
-            <li>
-              <Link 
-                to="/#projects" 
-                onClick={(e) => {
-                  if (location.pathname === '/') {
-                    e.preventDefault();
-                    document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }}
-              >
-                Projects
-              </Link>
-            </li>
-            <li>
-              <Link 
-                to="/#contact" 
-                onClick={(e) => {
-                  if (location.pathname === '/') {
-                    e.preventDefault();
-                    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }}
-              >
-                Contact
-              </Link>
-            </li>
-          </ul>
+            <ul className="nav-links">
+              <li>
+                <Link 
+                  to="/#home" 
+                  onClick={(e) => {
+                    if (location.pathname === '/') {
+                      e.preventDefault();
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }
+                  }}
+                >
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  to="/#about" 
+                  onClick={(e) => {
+                    if (location.pathname === '/') {
+                      e.preventDefault();
+                      document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }}
+                >
+                  About
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  to="/#skills" 
+                  onClick={(e) => {
+                    if (location.pathname === '/') {
+                      e.preventDefault();
+                      document.getElementById('skills')?.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }}
+                >
+                  Skills
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  to="/#projects" 
+                  onClick={(e) => {
+                    if (location.pathname === '/') {
+                      e.preventDefault();
+                      document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }}
+                >
+                  Projects
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  to="/#contact" 
+                  onClick={(e) => {
+                    if (location.pathname === '/') {
+                      e.preventDefault();
+                      document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }}
+                >
+                  Contact
+                </Link>
+              </li>
+            </ul>
 
             <button 
               className="theme-toggle glass" 
@@ -89,7 +90,6 @@ const Navbar = ({ theme, toggleTheme }) => {
               <i className={`fas ${theme === 'dark' ? 'fa-sun' : 'fa-moon'}`}></i>
             </button>
 
-            {/* Terminal shortcut */}
             <button
               onClick={() => navigate('/terminal')}
               aria-label="Open Terminal"
@@ -114,7 +114,7 @@ const Navbar = ({ theme, toggleTheme }) => {
           </div>
         </nav>
 
-        {isProjectsPage && (
+        {(isProjectsPage || isProjectDetailPage) && (
           <button 
             onClick={() => navigate(-1)}
             className="back-btn-external glass"

@@ -1,16 +1,19 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useProjectConfig } from '../hooks/useProjectConfig';
 import { ProjectCardWrapper, ProjectCardSkeleton } from './ProjectCard';
-import { ProjectMeta } from '../types/project.types';
-import ProjectModal from './ProjectModal';
 
 const ProjectsGrid: React.FC = () => {
     const navigate = useNavigate();
+    const location = useLocation();
     const { projects, loading } = useProjectConfig();
-    const [selectedProject, setSelectedProject] = useState<ProjectMeta | null>(null);
     
     const featuredProjects = projects.filter(p => p.featured).slice(0, 3);
+
+    const handleProjectClick = (meta: { name: string }) => {
+      sessionStorage.setItem('homepage-scroll', String(window.scrollY));
+      navigate(`/project/${meta.name}`, { state: { background: location } });
+    };
 
     return (
         <div className="projects-grid-container">
@@ -23,7 +26,7 @@ const ProjectsGrid: React.FC = () => {
                           key={project.repoName} 
                           config={project} 
                           size="compact" 
-                          onClick={(meta) => setSelectedProject(meta)}
+                          onClick={handleProjectClick}
                         />
                     ))
                 )}
@@ -38,13 +41,6 @@ const ProjectsGrid: React.FC = () => {
                     View All Projects <i className="fas fa-arrow-right text-xs transition-transform group-hover:translate-x-1"></i>
                 </button>
             </div>
-
-            {selectedProject && (
-                <ProjectModal 
-                    project={selectedProject} 
-                    onClose={() => setSelectedProject(null)} 
-                />
-            )}
         </div>
     );
 };

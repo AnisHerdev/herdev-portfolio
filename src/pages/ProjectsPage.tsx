@@ -1,23 +1,34 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useProjectConfig } from '../hooks/useProjectConfig';
 import { ProjectCardWrapper, ProjectCardSkeleton } from '../components/ProjectCard';
-import ProjectModal from '../components/ProjectModal';
 import { ProjectMeta } from '../types/project.types';
 
 const ProjectsPage: React.FC = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const { projects, loading } = useProjectConfig();
   const [currentPage, setCurrentPage] = useState(1);
-  const [selectedProject, setSelectedProject] = useState<ProjectMeta | null>(null);
   const itemsPerPage = 6;
 
-  // Scroll to top when page changes
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    const savedScroll = sessionStorage.getItem('projects-scroll');
+    if (savedScroll) {
+      window.scrollTo(0, parseInt(savedScroll, 10));
+      sessionStorage.removeItem('projects-scroll');
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   }, [currentPage]);
 
   const totalPages = projects.length > 0 ? Math.ceil(projects.length / itemsPerPage) : 1;
   const startIndex = (currentPage - 1) * itemsPerPage;
   const currentProjects = projects.slice(startIndex, startIndex + itemsPerPage);
+
+  const handleProjectClick = (meta: { name: string }) => {
+    sessionStorage.setItem('projects-scroll', String(window.scrollY));
+    navigate(`/project/${meta.name}`, { state: { background: location } });
+  };
 
   return (
     <section className="section !pt-32 min-h-screen">
@@ -40,7 +51,7 @@ const ProjectsPage: React.FC = () => {
                    key={project.repoName} 
                    config={project} 
                    size="full" 
-                   onClick={(meta) => setSelectedProject(meta)}
+                   onClick={handleProjectClick}
                    headingLevel="h2"
                 />
               ))}
@@ -78,13 +89,6 @@ const ProjectsPage: React.FC = () => {
           </>
         )}
       </div>
-
-      {selectedProject && (
-        <ProjectModal 
-          project={selectedProject} 
-          onClose={() => setSelectedProject(null)} 
-        />
-      )}
     </section>
   );
 };

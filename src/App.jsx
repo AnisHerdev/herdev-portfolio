@@ -10,6 +10,7 @@ import { HomePageSkeleton } from './components/LoadingSkeletons';
 const HomePage     = lazy(() => import('./pages/HomePage'));
 const ProjectsPage = lazy(() => import('./pages/ProjectsPage'));
 const TerminalPage = lazy(() => import('./pages/TerminalPage'));
+const ProjectDetailPage = lazy(() => import('./pages/ProjectDetailPage'));
 
 // Clean loader for Suspense - full page skeleton matching HomePage structure
 const PageLoader = () => (
@@ -94,6 +95,34 @@ const ScrollRevealObserver = () => {
   return null;
 };
 
+const AppContent = ({ theme, toggleTheme }) => {
+  const location = useLocation();
+  const background = location.state?.background;
+
+  return (
+    <>
+      <SiteChrome theme={theme} toggleTheme={toggleTheme} />
+      <main>
+        <Suspense fallback={<PageLoader />}>
+          <Routes location={background || location}>
+            <Route path="/"         element={<HomePage />} />
+            <Route path="/projects" element={<ProjectsPage />} />
+            <Route path="/project/:repoName" element={<ProjectDetailPage />} />
+            <Route path="/terminal" element={<TerminalPage />} />
+          </Routes>
+
+          {background && (
+            <Routes>
+              <Route path="/project/:repoName" element={<ProjectDetailPage />} />
+            </Routes>
+          )}
+        </Suspense>
+      </main>
+      <SiteFooter />
+    </>
+  );
+};
+
 const App = () => {
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'dark');
 
@@ -109,17 +138,7 @@ const App = () => {
       <ScrollToHash />
       <ViewTransitions />
       <ScrollRevealObserver />
-      <SiteChrome theme={theme} toggleTheme={toggleTheme} />
-      <main>
-        <Suspense fallback={<PageLoader />}>
-          <Routes>
-            <Route path="/"         element={<HomePage />} />
-            <Route path="/projects" element={<ProjectsPage />} />
-            <Route path="/terminal" element={<TerminalPage />} />
-          </Routes>
-        </Suspense>
-      </main>
-      <SiteFooter />
+      <AppContent theme={theme} toggleTheme={toggleTheme} />
     </Router>
   );
 };
