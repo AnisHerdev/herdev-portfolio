@@ -11,7 +11,7 @@
 
   --glass-bg: rgba(255, 255, 255, 0.03);
   --glass-border: rgba(255, 255, 255, 0.08);
-  --glass-blur: blur(25px);
+  --glass-blur: blur(12px);
 
   /* Spacing Scale */
   --space-xs: 0.5rem;
@@ -88,12 +88,12 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  scroll-behavior: smooth;
 }
 
 html {
   scrollbar-gutter: stable;
   overflow-y: scroll; /* fallback for older browsers */
+  scroll-behavior: smooth;
 }
 
 body {
@@ -131,6 +131,8 @@ body {
   border-radius: 50%;
   opacity: 0.3;
   animation: move-blobs 25s infinite alternate ease-in-out;
+  contain: strict;
+  will-change: transform;
 }
 
 .blob-blue {
@@ -493,7 +495,7 @@ h1 span {
   border: 1px solid var(--glass-border);
   background: var(--glass-bg);
   color: var(--text-primary);
-  backdrop-filter: blur(25px);
+  backdrop-filter: var(--glass-blur);
 }
 
 .btn-secondary:hover {
@@ -522,6 +524,8 @@ h1 span {
 /* --- Sections & Cards --- */
 .section {
   padding: var(--space-4xl) 0;
+  content-visibility: auto;
+  contain-intrinsic-size: 0 500px;
 }
 
 .container {
