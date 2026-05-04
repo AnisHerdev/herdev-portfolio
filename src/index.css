@@ -48,7 +48,10 @@
   
   --blue-glow: #0071e3;
   --pink-glow: #ff2d55;
-  --green-glow: #34c759;
+  --green-glow: #248a3d; /* Darker green for accessibility */
+  
+  --card-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.08);
+  --card-border: rgba(0, 0, 0, 0.08);
 }
 
 body {
@@ -60,7 +63,7 @@ body {
 }
 
 .light-mode h1 span, .light-mode .logo {
-  background: linear-gradient(to right, var(--text-primary), var(--text-secondary));
+  background: linear-gradient(to right, #0071e3, #ff2d55);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -70,8 +73,13 @@ body {
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.05);
 }
 
+.light-mode .project-card {
+  box-shadow: var(--card-shadow);
+  border-color: var(--card-border);
+}
+
 .light-mode .project-card::before {
-  opacity: 0.3;
+  opacity: 0.15;
 }
 
 .light-mode .project-modal-overlay {
@@ -79,12 +87,25 @@ body {
 }
 
 .light-mode .project-modal-container {
-  background: rgba(255, 255, 255, 0.95);
-  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
 }
 
 .light-mode .project-detail-overlay {
-  background: rgba(251, 251, 252, 0.95);
+  background: rgba(251, 251, 252, 0.8);
+}
+
+.light-mode .project-detail-card {
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 50px rgba(0, 0, 0, 0.1);
+}
+
+.light-mode .frosted {
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
 }
 
 .light-mode .modal-close-btn {
@@ -99,9 +120,27 @@ body {
 }
 
 .light-mode .btn-secondary {
-  background: rgba(0, 0, 0, 0.03) !important;
-  border-color: rgba(0, 0, 0, 0.1) !important;
+  background: rgba(0, 0, 0, 0.04) !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
   color: #1d1d1f !important;
+}
+
+.light-mode .tag-green {
+  background: rgba(36, 138, 61, 0.1);
+  color: #1a632c;
+  border-color: rgba(36, 138, 61, 0.2);
+}
+
+.light-mode .project-close-btn {
+  background: rgba(220, 38, 38, 0.15); /* More saturated red for light mode */
+  border-color: rgba(220, 38, 38, 0.3);
+  color: #dc2626;
+}
+
+.light-mode .project-close-btn:hover {
+  background: rgba(220, 38, 38, 0.25);
+  border-color: rgba(220, 38, 38, 0.5);
+  color: #b91c1c;
 }
 
 * {
@@ -1285,8 +1324,8 @@ footer p {
 
   .modal-title {
     font-size: 2rem !important;
-    color: #ffffff !important;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    color: var(--text-primary) !important;
+    text-shadow: none;
     margin-top: 1.5rem !important;
     margin-bottom: 1.5rem !important;
     display: block !important;
@@ -1310,7 +1349,7 @@ footer p {
 
   .markdown-body {
     font-size: 1rem;
-    color: rgba(255, 255, 255, 0.85);
+    color: var(--text-secondary);
   }
 }
 
