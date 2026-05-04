@@ -62,7 +62,7 @@ Intended for **AIML and Fintech-focused roles**, with emphasis on full-stack cap
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/herdev-portfolio.git
+git clone https://github.com/anisherdev/herdev-portfolio.git
 cd herdev-portfolio
 ```
 
