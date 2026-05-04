@@ -37,21 +37,22 @@
 }
 
 .light-mode {
-  --bg-dark: #fbfbfc;
+  --bg-dark: #e5e5ea; /* Darker off-white/grey to reduce glare */
   --text-primary: #1d1d1f;
-  --text-secondary: rgba(0, 0, 0, 0.65);
-  --text-muted: rgba(0, 0, 0, 0.45);
+  --text-secondary: #424245;
+  --text-muted: #86868b;
 
-  --glass-bg: rgba(255, 255, 255, 0.7);
-  --glass-border: rgba(0, 0, 0, 0.08);
+  --glass-bg: rgba(255, 255, 255, 0.8);
+  --glass-border: rgba(0, 0, 0, 0.05);
   --glass-blur: blur(20px);
   
   --blue-glow: #0071e3;
   --pink-glow: #ff2d55;
-  --green-glow: #248a3d; /* Darker green for accessibility */
+  --green-glow: #248a3d; 
   
-  --card-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.08);
-  --card-border: rgba(0, 0, 0, 0.08);
+  --card-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.08);
+  --card-border: rgba(0, 0, 0, 0.04);
+  --card-bg-light: rgba(255, 255, 255, 0.5); /* Control card opacity here */
 }
 
 body {
@@ -74,8 +75,9 @@ body {
 }
 
 .light-mode .project-card {
-  box-shadow: var(--card-shadow);
-  border-color: var(--card-border);
+  background: var(--card-bg-light) !important;
+  box-shadow: 0 10px 60px rgba(0, 0, 0, 0.25) !important;
+  border-color: rgba(0, 0, 0, 0.06) !important;
 }
 
 .light-mode .project-card::before {
@@ -87,25 +89,31 @@ body {
 }
 
 .light-mode .project-modal-container {
-  background: #ffffff;
+  background: var(--card-bg-light);
   border: 1px solid rgba(0, 0, 0, 0.1);
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
 }
 
 .light-mode .project-detail-overlay {
-  background: rgba(251, 251, 252, 0.8);
+  background: rgba(251, 251, 252, 0.1);
 }
 
 .light-mode .project-detail-card {
-  background: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  box-shadow: 0 10px 50px rgba(0, 0, 0, 0.1);
+  background: var(--card-bg-light);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 40px 120px rgba(0, 0, 0, 0.22);
+}
+
+.light-mode .hero-container {
+  background: var(--card-bg-light);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18);
+  border: 1px solid rgba(0, 0, 0, 0.04);
 }
 
 .light-mode .frosted {
-  background: rgba(255, 255, 255, 0.8);
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+  background: var(--card-bg-light);
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
 }
 
 .light-mode .modal-close-btn {
@@ -714,7 +722,7 @@ h1 span {
   background: var(--card-bg);
   border: 1px solid var(--glass-border);
   border-radius: 24px;
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  box-shadow: 0 12px 48px 0 rgba(0, 0, 0, 0.6);
 }
 
 .project-card::before {
