@@ -24,6 +24,16 @@
   --space-3xl: 6rem;
   --space-4xl: 8rem;
   --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Scroll-driven reveal animations */
+  --reveal-duration: 0.8s;
+  --reveal-ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --reveal-duration: 0s;
+  }
 }
 
 .light-mode {
@@ -65,7 +75,12 @@ body {
 }
 
 .light-mode .project-modal-overlay {
-  background: rgba(255, 255, 255, 0.4);
+  background: rgba(251, 251, 252, 0.9);
+}
+
+.light-mode .project-modal-container {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(0, 0, 0, 0.12);
 }
 
 .light-mode .modal-close-btn {
@@ -956,23 +971,25 @@ footer p {
 .project-modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: rgba(5, 5, 7, 0.85);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
   z-index: 3000;
   display: flex;
-  align-items: center;
-  justify-content: center;
   padding: var(--space-md);
+  padding-top: calc(var(--space-md) + 80px);
+  overflow-y: auto;
 }
 
 .project-modal-container {
-  width: 95%;
+  width: 100%;
   max-width: 900px;
-  max-height: 90vh;
+  margin: 0 auto;
   padding: var(--space-xl);
-  overflow-y: auto;
   position: relative;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 24px;
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
   animation: animateModalIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -1049,7 +1066,7 @@ footer p {
 .markdown-body li { margin-bottom: 0.5rem; }
 
 .markdown-body code {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.1);
   padding: 0.2rem 0.4rem;
   border-radius: 4px;
   font-family: 'JetBrains Mono', monospace;
@@ -1057,12 +1074,12 @@ footer p {
 }
 
 .markdown-body pre {
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.4);
   padding: 1.5rem;
   border-radius: 12px;
   overflow-x: auto;
   margin: 1.5rem 0;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .markdown-body pre code {
@@ -1097,13 +1114,21 @@ footer p {
 }
 
 @media (max-width: 768px) {
+  .project-modal-overlay {
+    padding: 0;
+    padding-top: var(--space-md);
+    align-items: flex-end;
+  }
+  
   .project-modal-container {
     padding: var(--space-lg);
     width: 100%;
     margin: 0;
     height: 100%;
     max-height: 100%;
-    border-radius: 0;
+    border-radius: 24px 24px 0 0;
+    background: rgba(5, 5, 7, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.15);
   }
 }
 
@@ -1263,6 +1288,133 @@ footer p {
   
   .page-indicator-numbers {
     font-size: 1rem;
+  }
+}
+
+/* --- Scroll-driven Reveal Animations --- */
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes reveal-up-delay-1 {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes reveal-up-delay-2 {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes reveal-up-delay-3 {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes reveal-up-delay-4 {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes reveal-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Hero entrance animation */
+.hero-container {
+  animation: reveal-up var(--reveal-duration) var(--reveal-ease) both;
+}
+
+.hero-image {
+  animation: reveal-up var(--reveal-duration) var(--reveal-ease) both;
+  animation-delay: 0.1s;
+}
+
+.hero h1 {
+  animation: reveal-up-delay-1 var(--reveal-duration) var(--reveal-ease) both;
+  animation-delay: 0.2s;
+}
+
+.hero .tagline {
+  animation: reveal-up-delay-2 var(--reveal-duration) var(--reveal-ease) both;
+  animation-delay: 0.3s;
+}
+
+.hero .intro {
+  animation: reveal-up-delay-3 var(--reveal-duration) var(--reveal-ease) both;
+  animation-delay: 0.4s;
+}
+
+.hero .social-links {
+  animation: reveal-up-delay-4 var(--reveal-duration) var(--reveal-ease) both;
+  animation-delay: 0.5s;
+}
+
+.hero .cta-group {
+  animation: reveal-up-delay-4 var(--reveal-duration) var(--reveal-ease) both;
+  animation-delay: 0.6s;
+}
+
+/* Scroll-driven reveal for sections */
+@supports (animation-timeline: scroll()) {
+  .section {
+    view-timeline-name: --section-reveal;
+    view-timeline-axis: block;
+    animation: reveal-up var(--reveal-duration) var(--reveal-ease) both;
+    animation-timeline: --section-reveal;
+    animation-range: entry 10% cover 40%;
+  }
+  
+  .hero {
+    animation-timeline: none;
+    animation: none;
+  }
+}
+
+/* Fallback for no scroll-driven support */
+@supports not (animation-timeline: scroll()) {
+  .section {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity var(--reveal-duration) var(--reveal-ease), 
+                transform var(--reveal-duration) var(--reveal-ease);
+  }
+  
+  .section.visible {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 

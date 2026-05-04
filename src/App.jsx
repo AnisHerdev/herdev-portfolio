@@ -1,5 +1,5 @@
-import React, { useEffect, useState, lazy, Suspense } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import React, { useEffect, useState, lazy, Suspense, useCallback } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation, useNavigationType } from 'react-router-dom';
 import BgBlobs from './components/BgBlobs';
 import Navbar from './components/Navbar';
 import MobileNav from './components/MobileNav';
@@ -35,6 +35,23 @@ const ScrollToHash = () => {
   return null;
 };
 
+const ViewTransitions = () => {
+  const location = useLocation();
+  const navigationType = useNavigationType();
+
+  useEffect(() => {
+    if (!document.startViewTransition) return;
+
+    const transition = document.startViewTransition(() => {});
+    
+    if (transition.ready) {
+      transition.finished.then(() => {});
+    }
+  }, [location, navigationType]);
+
+  return null;
+};
+
 // Conditionally renders site chrome based on route
 const SiteChrome = ({ theme, toggleTheme }) => {
   const location = useLocation();
@@ -55,6 +72,28 @@ const SiteFooter = () => {
   return <Footer />;
 };
 
+const ScrollRevealObserver = () => {
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+    );
+
+    const sections = document.querySelectorAll('.section');
+    sections.forEach((section) => observer.observe(section));
+
+    return () => observer.disconnect();
+  }, []);
+
+  return null;
+};
+
 const App = () => {
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'dark');
 
@@ -68,6 +107,8 @@ const App = () => {
   return (
     <Router>
       <ScrollToHash />
+      <ViewTransitions />
+      <ScrollRevealObserver />
       <SiteChrome theme={theme} toggleTheme={toggleTheme} />
       <main>
         <Suspense fallback={<PageLoader />}>

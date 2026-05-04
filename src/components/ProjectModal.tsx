@@ -9,9 +9,11 @@ interface ProjectModalProps {
 }
 
 const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
-  // Prevent scrolling when modal is open
+  // Prevent scrolling when modal is open but DON'T scroll the window
   useEffect(() => {
+    const currentScroll = window.scrollY;
     document.body.style.overflow = 'hidden';
+    
     return () => {
       document.body.style.overflow = 'auto';
     };
