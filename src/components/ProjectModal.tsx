@@ -19,7 +19,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
 
   return (
     <div className="project-modal-overlay" onClick={onClose}>
-      <div className="project-modal-container glass animate-modal-in" onClick={(e) => e.stopPropagation()}>
+       <div className="project-modal-container frosted animate-modal-in" onClick={(e) => e.stopPropagation()}>
         <button className="modal-close-btn" onClick={onClose} aria-label="Close modal">
           <i className="fas fa-times"></i>
         </button>

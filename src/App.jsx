@@ -12,9 +12,9 @@ const TerminalPage = lazy(() => import('./pages/TerminalPage'));
 
 // Clean loader for Suspense
 const PageLoader = () => (
-  <div className="min-h-screen flex items-center justify-center">
-    <div className="glass p-8 animate-pulse text-white/50">Loading...</div>
-  </div>
+     <div className="min-h-screen flex items-center justify-center">
+      <div className="p-8 animate-pulse" style={{ background: 'var(--card-bg)', border: '1px solid var(--glass-border)', borderRadius: '24px' }}>Loading...</div>
+    </div>
 );
 
 const ScrollToHash = () => {

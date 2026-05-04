@@ -12,6 +12,7 @@
   --glass-bg: rgba(255, 255, 255, 0.03);
   --glass-border: rgba(255, 255, 255, 0.08);
   --glass-blur: blur(12px);
+  --card-bg: rgba(255, 255, 255, 0.08);
 
   /* Spacing Scale */
   --space-xs: 0.5rem;
@@ -130,9 +131,7 @@ body {
   height: 400px;
   border-radius: 50%;
   opacity: 0.3;
-  animation: move-blobs 25s infinite alternate ease-in-out;
   contain: strict;
-  will-change: transform;
 }
 
 .blob-blue {
@@ -155,29 +154,19 @@ body {
   animation-delay: -12s;
 }
 
-@keyframes move-blobs {
-  0% {
-    transform: translate(0, 0) rotate(0deg) scale(1);
-  }
-
-  33% {
-    transform: translate(100px, 50px) rotate(120deg) scale(1.1);
-  }
-
-  66% {
-    transform: translate(-50px, 100px) rotate(240deg) scale(0.9);
-  }
-
-  100% {
-    transform: translate(0, 0) rotate(360deg) scale(1);
-  }
-}
-
 /* --- Glass Styling Core --- */
 .glass {
   background: var(--glass-bg);
   -webkit-backdrop-filter: var(--glass-blur);
   backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+/* --- Frosted look without backdrop-filter (for scroll-path elements) --- */
+.frosted {
+  background: var(--card-bg);
   border: 1px solid var(--glass-border);
   border-radius: 24px;
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
@@ -449,7 +438,7 @@ h1 span {
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background: var(--glass-bg);
+  background: var(--card-bg);
   border: 1px solid var(--glass-border);
   color: var(--text-primary);
   text-decoration: none;
@@ -493,9 +482,8 @@ h1 span {
 
 .btn-secondary {
   border: 1px solid var(--glass-border);
-  background: var(--glass-bg);
+  background: var(--card-bg);
   color: var(--text-primary);
-  backdrop-filter: var(--glass-blur);
 }
 
 .btn-secondary:hover {
@@ -586,6 +574,10 @@ h1 span {
   padding: var(--space-2xl) var(--space-md);
   text-align: center;
   transition: var(--transition);
+  background: var(--card-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
 
 .skill-card i {
@@ -657,6 +649,10 @@ h1 span {
   width: 100%;
   position: relative;
   overflow: hidden;
+  background: var(--card-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
 
 .project-card::before {

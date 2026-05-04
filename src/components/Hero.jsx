@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const Hero = () => {
   return (
     <section id="home" className="hero">
-      <div className="hero-container glass">
+       <div className="hero-container frosted">
         <div className="hero-image">
           <img src="/assets/profile.jpg" alt="S A Herdev Anish" width="150" height="150" />
         </div>
@@ -17,8 +17,8 @@ const Hero = () => {
           <a href="https://herdevanish-cv.tiiny.site" className="glass-icon" target="_blank" rel="noopener noreferrer" title="View Resume"><i className="fas fa-file-alt"></i></a>
         </div>
         <div className="cta-group">
-          <Link to="/#projects" className="btn btn-primary glass">View Projects</Link>
-          <Link to="/#contact" className="btn btn-secondary glass">Contact Me</Link>
+           <Link to="/#projects" className="btn btn-primary">View Projects</Link>
+           <Link to="/#contact" className="btn btn-secondary">Contact Me</Link>
         </div>
       </div>
     </section>

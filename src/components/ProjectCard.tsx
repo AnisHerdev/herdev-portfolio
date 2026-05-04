@@ -3,7 +3,7 @@ import { ProjectMeta, ProjectConfig } from '../types/project.types';
 import { useGitHubRepo } from '../hooks/useGitHubRepo';
 
 export const ProjectCardSkeleton = () => (
-  <div className="project-card glass bg-white/[0.02] border-white/5 animate-pulse flex flex-col p-8">
+  <div className="project-card bg-white/[0.08] border-white/5 animate-pulse flex flex-col p-8">
     <div className="flex gap-2 mb-4">
         <div className="h-5 bg-white/10 rounded-full w-16"></div>
         <div className="h-5 bg-white/10 rounded-full w-16"></div>
@@ -21,8 +21,8 @@ export const ProjectCardWrapper: React.FC<{ config: ProjectConfig; size?: 'compa
   const { meta, loading, error } = useGitHubRepo(config);
 
   if (loading) return <ProjectCardSkeleton />;
-  if (error || !meta) return (
-    <div className="glass p-8 text-center text-sm text-white/50 border-white/5 flex flex-col items-center justify-center min-h-[220px]">
+  if (error || !meta)    return (
+    <div className="p-8 text-center text-sm text-white/50 border-white/5 flex flex-col items-center justify-center min-h-[220px]" style={{ background: 'rgba(255,255,255,0.08)' }}>
         <i className="fas fa-exclamation-triangle mb-2 text-[#ec4899] opacity-50 text-xl"></i>
         <span>Repo fetch failed: {config.alias || config.repoName}</span>
     </div>
@@ -47,7 +47,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ meta, size = 'compact', onCli
 
   return (
     <div 
-      className="project-card glass group transition-all duration-300" 
+      className="project-card group transition-all duration-300"
       onClick={onClick}
       style={{ cursor: onClick ? 'pointer' : 'default' }}
     >

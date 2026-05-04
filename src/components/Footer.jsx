@@ -2,7 +2,7 @@ import React from 'react';
 
 const Footer = () => {
   return (
-    <footer className="glass">
+     <footer className="frosted">
       <p>&copy; 2026 S A Herdev Anish | Designed with Glassmorphism</p>
     </footer>
   );
