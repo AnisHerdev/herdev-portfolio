@@ -8,7 +8,7 @@ const About = () => {
          <div className="about-card frosted">
           <div className="about-content">
             <p>I am someone who cares for people around me. This foundational value drives my passion for technology—solving problems to simplify lives.</p>
-            <p>As a computer science student at <strong>RV University</strong>, I focus on bridging theoretical AI research with practical engineering. I thrive in hackathons, collaborative spaces, and environments where technology is driven by empathy and real-world impact.</p>
+            <p>Currently pursuing <strong>B.Tech (Hons.) in CSE at RV University</strong>, specializing in <strong>AIML</strong> with a minor in <strong>Fintech</strong>. I love the collaborative energy of hackathons and impactful projects.</p>
           </div>
         </div>
       </div>
