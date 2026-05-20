@@ -3,16 +3,16 @@ import { ProjectMeta, ProjectConfig } from '../types/project.types';
 import { useGitHubRepo } from '../hooks/useGitHubRepo';
 
 export const ProjectCardSkeleton = () => (
-  <div className="project-card bg-white/[0.08] border-white/5 animate-pulse flex flex-col">
-    <div className="flex gap-2 mb-4">
-        <div className="h-5 bg-white/10 rounded-full w-16"></div>
-        <div className="h-5 bg-white/10 rounded-full w-16"></div>
+  <div className="project-card-skeleton">
+    <div className="skeleton-tags">
+        <div className="skeleton-tag"></div>
+        <div className="skeleton-tag"></div>
     </div>
-    <div className="h-8 bg-white/10 rounded w-3/4 mb-4"></div>
-    <div className="h-4 bg-white/10 rounded w-full mb-2"></div>
-    <div className="h-4 bg-white/10 rounded w-5/6"></div>
-    <div className="mt-auto pt-6">
-        <div className="h-3 bg-white/10 rounded w-20"></div>
+    <div className="skeleton-title"></div>
+    <div className="skeleton-text"></div>
+    <div className="skeleton-text short"></div>
+    <div className="skeleton-footer">
+        <div className="skeleton-link"></div>
     </div>
   </div>
 );
@@ -21,9 +21,9 @@ export const ProjectCardWrapper: React.FC<{ config: ProjectConfig; size?: 'compa
   const { meta, loading, error } = useGitHubRepo(config);
 
   if (loading) return <ProjectCardSkeleton />;
-  if (error || !meta)    return (
-    <div className="p-8 text-center text-sm text-white/50 border-white/5 flex flex-col items-center justify-center min-h-[220px]" style={{ background: 'rgba(255,255,255,0.08)' }}>
-        <i className="fas fa-exclamation-triangle mb-2 text-[#ec4899] opacity-50 text-xl"></i>
+  if (error || !meta) return (
+    <div className="project-card-error">
+        <i className="fas fa-exclamation-triangle"></i>
         <span>Repo fetch failed: {config.alias || config.repoName}</span>
     </div>
   );

@@ -35,10 +35,9 @@ const ProjectsGrid: React.FC = () => {
             <div className="projects-view-all">
                 <button 
                     onClick={() => navigate('/projects')}
-                    className="btn btn-secondary group flex items-center gap-2"
-                    style={{ cursor: 'pointer' }}
+                    className="btn btn-secondary view-all-btn"
                 >
-                    View All Projects <i className="fas fa-arrow-right text-xs transition-transform group-hover:translate-x-1"></i>
+                    View All Projects <i className="fas fa-arrow-right"></i>
                 </button>
             </div>
         </div>

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const MacMenubar: React.FC = () => {
+  const navigate = useNavigate();
   const [clock, setClock] = useState('');
 
   useEffect(() => {
@@ -63,6 +65,34 @@ const MacMenubar: React.FC = () => {
 
       {/* Right side */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+        {/* Exit Button */}
+        <button
+          onClick={() => navigate('/')}
+          style={{
+            background: 'rgba(239, 68, 68, 0.2)',
+            border: '1px solid rgba(239, 68, 68, 0.4)',
+            borderRadius: '4px',
+            color: '#FCA5A5',
+            fontSize: '11px',
+            fontWeight: 600,
+            padding: '2px 8px',
+            cursor: 'pointer',
+            fontFamily: 'system-ui, sans-serif',
+            marginRight: '8px',
+            transition: 'all 0.2s ease',
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.background = 'rgba(239, 68, 68, 0.35)';
+            e.currentTarget.style.borderColor = 'rgba(239, 68, 68, 0.6)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.background = 'rgba(239, 68, 68, 0.2)';
+            e.currentTarget.style.borderColor = 'rgba(239, 68, 68, 0.4)';
+          }}
+        >
+          Exit Terminal
+        </button>
+
         {/* Wifi icon */}
         <svg width="16" height="12" viewBox="0 0 24 18" fill="rgba(255,255,255,0.7)">
           <path d="M12 4.5C7.5 4.5 3.5 6.5 0.7 9.7l2.1 2.1C5 9.3 8.3 7.5 12 7.5s7 1.8 9.2 4.3l2.1-2.1C20.5 6.5 16.5 4.5 12 4.5z" opacity="0.4"/>

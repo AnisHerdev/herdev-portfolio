@@ -3,7 +3,7 @@
   /* Subtle blue tint for depth */
   --text-primary: #ffffff;
   --text-secondary: rgba(255, 255, 255, 0.7);
-  --text-muted: rgba(255, 255, 255, 0.5);
+  --text-muted: rgba(255, 255, 255, 0.65);
 
   --blue-glow: #3b82f6;
   --pink-glow: #ec4899;
@@ -40,7 +40,7 @@
   --bg-dark: #e5e5ea; /* Darker off-white/grey to reduce glare */
   --text-primary: #1d1d1f;
   --text-secondary: #424245;
-  --text-muted: #86868b;
+  --text-muted: #5d5d61;
 
   --glass-bg: rgba(255, 255, 255, 0.8);
   --glass-border: rgba(0, 0, 0, 0.05);
@@ -221,14 +221,12 @@ body {
   background: var(--pink-glow);
   bottom: -5%;
   right: 15%;
-  animation-delay: -5s;
 }
 
 .blob-green {
   background: var(--green-glow);
   top: 40%;
   left: 50%;
-  animation-delay: -12s;
 }
 
 /* --- Glass Styling Core --- */
@@ -1653,4 +1651,203 @@ footer p {
     transform: translateY(0);
   }
 }
+
+/* --- Skill pill styling --- */
+.skill-pill-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  margin-top: var(--space-sm);
+}
+
+.skill-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.8rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  border-radius: 100px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  color: var(--text-secondary);
+  transition: all 0.2s ease;
+}
+
+.skill-pill:hover {
+  color: var(--text-primary);
+  transform: translateY(-2px);
+}
+
+/* Category specific colors for pills matching their neon glows */
+.skill-blue .skill-pill {
+  border-color: rgba(59, 130, 246, 0.2);
+  background: rgba(59, 130, 246, 0.05);
+}
+.skill-blue .skill-pill:hover {
+  border-color: var(--blue-glow);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+}
+
+.skill-pink .skill-pill {
+  border-color: rgba(236, 72, 153, 0.2);
+  background: rgba(236, 72, 153, 0.05);
+}
+.skill-pink .skill-pill:hover {
+  border-color: var(--pink-glow);
+  box-shadow: 0 4px 12px rgba(236, 72, 153, 0.15);
+}
+
+.skill-green .skill-pill {
+  border-color: rgba(16, 185, 129, 0.2);
+  background: rgba(16, 185, 129, 0.05);
+}
+.skill-green .skill-pill:hover {
+  border-color: var(--green-glow);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.15);
+}
+
+/* --- Project Detail Quick Specs Grid --- */
+.specs-container {
+  margin-bottom: var(--space-lg);
+  border-radius: 16px;
+  padding: var(--space-md);
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--glass-border);
+}
+
+.light-mode .specs-container {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.specs-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-md);
+}
+
+@media (min-width: 640px) {
+  .specs-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.spec-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.spec-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.spec-value {
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  font-weight: 500;
+  word-break: break-word;
+}
+
+/* --- Project Card Skeleton --- */
+.project-card-skeleton {
+  background: var(--card-bg);
+  border: 1px solid var(--glass-border);
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-md);
+  border-radius: 24px;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  min-height: 240px;
+}
+
+.skeleton-tags {
+  display: flex;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-sm);
+}
+
+.skeleton-tag {
+  height: 1.25rem;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 9999px;
+  width: 4rem;
+}
+
+.skeleton-title {
+  height: 2rem;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 4px;
+  width: 75%;
+  margin-bottom: var(--space-sm);
+}
+
+.skeleton-text {
+  height: 1rem;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 4px;
+  margin-bottom: var(--space-xs);
+  width: 100%;
+}
+
+.skeleton-text.short {
+  width: 83%;
+}
+
+.skeleton-footer {
+  margin-top: auto;
+  padding-top: var(--space-sm);
+}
+
+.skeleton-link {
+  height: 0.75rem;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 4px;
+  width: 5rem;
+}
+
+/* --- Project Card Error --- */
+.project-card-error {
+  padding: var(--space-lg);
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  border: 1px solid var(--glass-border);
+  background: var(--card-bg);
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 240px;
+}
+
+.project-card-error i {
+  margin-bottom: var(--space-xs);
+  color: var(--pink-glow);
+  opacity: 0.7;
+  font-size: 1.25rem;
+}
+
+/* --- View All Button --- */
+.view-all-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.view-all-btn i {
+  font-size: 0.75rem;
+  transition: transform 0.2s ease;
+}
+
+.view-all-btn:hover i {
+  transform: translateX(4px);
+}
+
 

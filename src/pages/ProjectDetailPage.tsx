@@ -12,7 +12,7 @@ const ProjectDetailPage: React.FC = () => {
   const { repoName } = useParams<{ repoName: string }>();
   const navigate = useNavigate();
   const { projects: configs, loading: configsLoading } = useProjectConfig();
-  
+
   const [config, setConfig] = useState<ProjectConfig | null>(null);
   const { meta, loading: metaLoading } = useGitHubRepo(config);
 
@@ -51,21 +51,21 @@ const ProjectDetailPage: React.FC = () => {
 
   return (
     <div className="project-detail-overlay">
-      <button 
-        className="project-close-btn" 
+      <button
+        className="project-close-btn"
         onClick={() => navigate(-1)}
         aria-label="Close project"
       >
         <i className="fas fa-times"></i>
       </button>
 
-      <div 
+      <div
         className="project-detail-scroll-container"
         onClick={(e) => {
           if (e.target === e.currentTarget) navigate(-1);
         }}
       >
-        <section 
+        <section
           className="project-detail-section"
           onClick={(e) => {
             if (e.target === e.currentTarget) navigate(-1);
@@ -73,57 +73,57 @@ const ProjectDetailPage: React.FC = () => {
         >
           <div className="project-detail-wrapper">
             <div className="project-detail-card frosted">
-            
-            <div className="project-tag-container !mb-4">
-              {meta.languages.map((lang) => (
-                <span key={lang} className="project-tag tag-green">
-                  {lang}
-                </span>
-              ))}
-            </div>
-            
-            <h1 className="modal-title !text-3xl md:!text-4xl !mb-4">{meta.alias}</h1>
-            
-            <div className="modal-links !mb-8">
-              <a href={meta.repoUrl} target="_blank" rel="noopener noreferrer" className="btn btn-secondary !py-2 !px-4 !text-xs">
-                <i className="fab fa-github"></i> Repository
-              </a>
-              {meta.deployedUrl && (
-                <a href={meta.deployedUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary !py-2 !px-4 !text-xs">
-                  <i className="fas fa-external-link-alt"></i> Live Demo
-                </a>
-              )}
-            </div>
 
-            <div className="markdown-body">
-              {meta.readme ? (
-                <ReactMarkdown 
-                  remarkPlugins={[remarkGfm]}
-                  rehypePlugins={[rehypeRaw]}
-                  components={{
-                    img: ({ node, src, ...props }) => {
-                      if (!src) return null;
-                      let finalSrc = src;
-                      if (!src.startsWith('http') && !src.startsWith('data:')) {
-                        const cleanUri = src.replace(/^\.\/|^\//, '');
-                        finalSrc = `https://raw.githubusercontent.com/AnisHerdev/${meta.name}/${meta.defaultBranch || 'main'}/${cleanUri}`;
+              <div className="project-tag-container !mb-4">
+                {meta.languages.map((lang) => (
+                  <span key={lang} className="project-tag tag-green">
+                    {lang}
+                  </span>
+                ))}
+              </div>
+
+              <h1 className="modal-title !text-3xl md:!text-4xl !mb-4">{meta.alias}</h1>
+
+              <div className="modal-links !mb-8">
+                <a href={meta.repoUrl} target="_blank" rel="noopener noreferrer" className="btn btn-secondary !py-2 !px-4 !text-xs">
+                  <i className="fab fa-github"></i> Repository
+                </a>
+                {meta.deployedUrl && (
+                  <a href={meta.deployedUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary !py-2 !px-4 !text-xs">
+                    <i className="fas fa-external-link-alt"></i> Live Demo
+                  </a>
+                )}
+              </div>
+
+              <div className="markdown-body">
+                {meta.readme ? (
+                  <ReactMarkdown
+                    remarkPlugins={[remarkGfm]}
+                    rehypePlugins={[rehypeRaw]}
+                    components={{
+                      img: ({ node, src, ...props }) => {
+                        if (!src) return null;
+                        let finalSrc = src;
+                        if (!src.startsWith('http') && !src.startsWith('data:')) {
+                          const cleanUri = src.replace(/^\.\/|^\//, '');
+                          finalSrc = `https://raw.githubusercontent.com/AnisHerdev/${meta.name}/${meta.defaultBranch || 'main'}/${cleanUri}`;
+                        }
+                        return <img src={finalSrc} {...props} style={{ maxWidth: '100%', borderRadius: '12px' }} />;
                       }
-                      return <img src={finalSrc} {...props} style={{ maxWidth: '100%', borderRadius: '12px' }} />;
-                    }
-                  }}
-                >
-                  {meta.readme}
-                </ReactMarkdown>
-              ) : (
-                <div className="empty-readme">
-                  <i className="fas fa-file-alt"></i>
-                  <p>No README content available for this repository.</p>
-                  <p className="text-xs">Try viewing the repository directly on GitHub.</p>
-                </div>
-              )}
+                    }}
+                  >
+                    {meta.readme}
+                  </ReactMarkdown>
+                ) : (
+                  <div className="empty-readme">
+                    <i className="fas fa-file-alt"></i>
+                    <p>No README content available for this repository.</p>
+                    <p className="text-xs">Try viewing the repository directly on GitHub.</p>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
-        </div>
         </section>
       </div>
     </div>
