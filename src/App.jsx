@@ -21,6 +21,7 @@ const PageLoader = () => (
 
 const ScrollToHash = () => {
   const { hash, pathname } = useLocation();
+  const navigationType = useNavigationType();
 
   useEffect(() => {
     if (hash) {
@@ -28,10 +29,10 @@ const ScrollToHash = () => {
       if (element) {
         setTimeout(() => { element.scrollIntoView({ behavior: 'smooth' }); }, 100);
       }
-    } else if (pathname === '/') {
+    } else if (pathname === '/' && navigationType !== 'POP') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-  }, [hash, pathname]);
+  }, [hash, pathname, navigationType]);
 
   return null;
 };

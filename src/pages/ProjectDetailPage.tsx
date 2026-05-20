@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useParams, useNavigate, Link, useLocation } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
@@ -11,6 +11,7 @@ import { ProjectCardSkeleton } from '../components/ProjectCard';
 const ProjectDetailPage: React.FC = () => {
   const { repoName } = useParams<{ repoName: string }>();
   const navigate = useNavigate();
+  const location = useLocation();
   const { projects: configs, loading: configsLoading } = useProjectConfig();
 
   const [config, setConfig] = useState<ProjectConfig | null>(null);
@@ -24,8 +25,11 @@ const ProjectDetailPage: React.FC = () => {
   }, [configsLoading, configs, repoName]);
 
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'instant' });
-  }, []);
+    // Only scroll the main window to top if we are NOT in modal overlay mode
+    if (!location.state?.background) {
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    }
+  }, [location.state]);
 
   if (configsLoading || metaLoading) {
     return (
