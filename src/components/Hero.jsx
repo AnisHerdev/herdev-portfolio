@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const Hero = () => {
   return (
     <section id="home" className="hero">
-       <div className="hero-container frosted">
+      <div className="hero-container frosted">
         <div className="hero-left">
           <div className="hero-image">
             <img src="/assets/profile.jpg" alt="S A Herdev Anish" width="150" height="150" />

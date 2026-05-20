@@ -3,82 +3,25 @@ import React from 'react';
 export const LoadingHeroSkeleton = () => (
   <section className="hero">
     <div className="hero-container frosted">
-      <div className="flex flex-col items-center gap-6">
-        <div 
-          className="animate-pulse" 
-          style={{ 
-            width: 'clamp(100px, 25vw, 150px)', 
-            height: 'clamp(100px, 25vw, 150px)', 
-            borderRadius: '50%', 
-            background: 'var(--glass-bg)',
-            border: '1px solid var(--glass-border)'
-          }} 
-        />
-        <div className="flex flex-col items-center gap-2">
-          <div 
-            className="animate-pulse" 
-            style={{ 
-              width: 'clamp(180px, 60vw, 280px)', 
-              height: '2.5rem', 
-              borderRadius: '8px', 
-              background: 'var(--glass-bg)' 
-            }} 
-          />
-          <div 
-            className="animate-pulse" 
-            style={{ 
-              width: 'clamp(140px, 45vw, 200px)', 
-              height: '1rem', 
-              borderRadius: '4px', 
-              background: 'var(--glass-bg)' 
-            }} 
-          />
+      <div className="hero-left">
+        <div className="skeleton-element skeleton-avatar"></div>
+        <div className="skeleton-element skeleton-title"></div>
+        <div className="skeleton-socials">
+          <div className="skeleton-element skeleton-icon"></div>
+          <div className="skeleton-element skeleton-icon"></div>
+          <div className="skeleton-element skeleton-icon"></div>
         </div>
-        <div 
-          className="animate-pulse" 
-          style={{ 
-            width: 'clamp(280px, 85vw, 400px)', 
-            height: '3.5rem', 
-            borderRadius: '8px', 
-            background: 'var(--glass-bg)' 
-          }} 
-        />
-        <div className="flex gap-4">
-          {[1, 2, 3].map((i) => (
-            <div 
-              key={i}
-              className="animate-pulse" 
-              style={{ 
-                width: 'clamp(40px, 10vw, 48px)', 
-                height: 'clamp(40px, 10vw, 48px)', 
-                borderRadius: '50%', 
-                background: 'var(--glass-bg)',
-                border: '1px solid var(--glass-border)'
-              }} 
-            />
-          ))}
+      </div>
+      <div className="hero-right">
+        <div className="skeleton-element skeleton-tagline"></div>
+        <div className="skeleton-intro">
+          <div className="skeleton-element skeleton-line"></div>
+          <div className="skeleton-element skeleton-line"></div>
+          <div className="skeleton-element skeleton-line"></div>
         </div>
-        <div className="flex gap-4 flex-wrap justify-center">
-          <div 
-            className="animate-pulse" 
-            style={{ 
-              width: 'clamp(120px, 40vw, 160px)', 
-              height: '48px', 
-              borderRadius: '100px', 
-              background: 'var(--glass-bg)',
-              border: '1px solid var(--glass-border)'
-            }} 
-          />
-          <div 
-            className="animate-pulse" 
-            style={{ 
-              width: 'clamp(100px, 35vw, 140px)', 
-              height: '48px', 
-              borderRadius: '100px', 
-              background: 'var(--glass-bg)',
-              border: '1px solid var(--glass-border)'
-            }} 
-          />
+        <div className="skeleton-ctas">
+          <div className="skeleton-element skeleton-btn"></div>
+          <div className="skeleton-element skeleton-btn"></div>
         </div>
       </div>
     </div>
